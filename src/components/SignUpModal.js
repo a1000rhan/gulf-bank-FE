@@ -6,18 +6,25 @@ function SignUpModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
     username: "",
+    firstName: "",
+    lastName: "",
     password: "",
+    phoneNumber: 0,
+    civilId: "",
     email: "",
   });
-  const handChange = (event) =>
-    setUser({ ...user, [event.target.name]: event.target.value });
+  const handChange = (event) => {
+    console.log(user);
+    return setUser({ ...user, [event.target.name]: event.target.value });
+  };
 
   const handleImage = (event) => {
-    setUser({ ...user, image: event.target.files[0] });
+    setUser({ ...user, civilId: event.target.files[0] });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     authStore.signUp(user);
     setIsOpen(false);
   };
@@ -50,7 +57,7 @@ function SignUpModal() {
             <InputGroup>
               <InputGroup.Text>First Name</InputGroup.Text>
               <Form.Control
-                name="firstname"
+                name="firstName"
                 type="text"
                 placeholder="First Name"
                 onChange={handChange}
@@ -60,7 +67,7 @@ function SignUpModal() {
             <InputGroup>
               <InputGroup.Text>Last Name</InputGroup.Text>
               <Form.Control
-                name="lastname"
+                name="lastName"
                 type="text"
                 placeholder="Last Name"
                 onChange={handChange}
@@ -70,7 +77,7 @@ function SignUpModal() {
             <InputGroup>
               <InputGroup.Text>Phone Number</InputGroup.Text>
               <Form.Control
-                name="phonenumber"
+                name="phoneNumber"
                 type="number"
                 placeholder="Phone Number"
                 onChange={handChange}
@@ -80,7 +87,7 @@ function SignUpModal() {
             <InputGroup>
               <InputGroup.Text>Civil ID</InputGroup.Text>
               <Form.Control
-                name="civilid"
+                name="civilId"
                 type="file"
                 placeholder="Upload your Civil ID"
                 onChange={handleImage}

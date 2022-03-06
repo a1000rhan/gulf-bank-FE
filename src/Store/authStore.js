@@ -20,7 +20,16 @@ class AuthStore {
     try {
       const formData = new FormData();
       for (const key in newUser) formData.append(key, newUser[key]);
+      console.log(
+        "🚀 ~ file: authStore.js ~ line 22 ~ AuthStore ~ signUp= ~ formData",
+        formData
+      );
+
       const response = await api.post("/signup", formData);
+      console.log(
+        "🚀 ~ file: authStore.js ~ line 25 ~ AuthStore ~ signUp= ~ response",
+        response.data
+      );
       this.setUser(response.data.token);
     } catch (error) {}
   };
