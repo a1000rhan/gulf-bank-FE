@@ -20,7 +20,7 @@ class AuthStore {
     try {
       const formData = new FormData();
       for (const key in newUser) formData.append(key, newUser[key]);
-      const response = await api.post("/user", formData);
+      const response = await api.post("/signup", formData);
       this.setUser(response.data.token);
     } catch (error) {}
   };

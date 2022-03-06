@@ -1,8 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
+import authStore from "../Store/authStore";
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
+import { Button } from "react-bootstrap";
+import { observer } from "mobx-react";
 
 const NavBar = () => {
   return (
@@ -46,11 +49,19 @@ const NavBar = () => {
         </div>
       </nav>
       <div>
-        <SignInModal />
-        <SignUpModal />
+        {authStore.user ? (
+          <Button className="btn-reg" onClick={authStore.logout}>
+            logout
+          </Button>
+        ) : (
+          <>
+            <SignInModal />
+            <SignUpModal />
+          </>
+        )}
       </div>
     </div>
   );
 };
 
-export default NavBar;
+export default observer(NavBar);

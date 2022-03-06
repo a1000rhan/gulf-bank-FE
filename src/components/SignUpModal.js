@@ -41,9 +41,8 @@ function SignUpModal() {
               <InputGroup.Text>UserName</InputGroup.Text>
               <Form.Control
                 name="username"
-                value={user.username}
                 type="text"
-                placeholder="Username "
+                placeholder="Username"
                 onChange={handChange}
               />
             </InputGroup>
@@ -52,7 +51,6 @@ function SignUpModal() {
               <InputGroup.Text>First Name</InputGroup.Text>
               <Form.Control
                 name="firstname"
-                value={user.firstname}
                 type="text"
                 placeholder="First Name"
                 onChange={handChange}
@@ -63,7 +61,6 @@ function SignUpModal() {
               <InputGroup.Text>Last Name</InputGroup.Text>
               <Form.Control
                 name="lastname"
-                value={user.lastname}
                 type="text"
                 placeholder="Last Name"
                 onChange={handChange}
@@ -74,7 +71,6 @@ function SignUpModal() {
               <InputGroup.Text>Phone Number</InputGroup.Text>
               <Form.Control
                 name="phonenumber"
-                value={user.phonenumber}
                 type="number"
                 placeholder="Phone Number"
                 onChange={handChange}
@@ -85,7 +81,6 @@ function SignUpModal() {
               <InputGroup.Text>Civil ID</InputGroup.Text>
               <Form.Control
                 name="civilid"
-                value={user.username}
                 type="file"
                 placeholder="Upload your Civil ID"
                 onChange={handleImage}
@@ -96,7 +91,6 @@ function SignUpModal() {
               <InputGroup.Text>Password</InputGroup.Text>
               <Form.Control
                 name="password"
-                value={user.password}
                 type="password"
                 placeholder="password here"
                 onChange={handChange}
@@ -107,7 +101,6 @@ function SignUpModal() {
               <InputGroup.Text>Email</InputGroup.Text>
               <Form.Control
                 name="email"
-                value={user.email}
                 type="text"
                 placeholder="email here"
                 onChange={handChange}
