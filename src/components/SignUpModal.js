@@ -39,7 +39,7 @@ function SignUpModal() {
         Sign Up
       </Button>
       <Modal centered show={isOpen} onHide={() => setIsOpen(false)}>
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>Sign up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
