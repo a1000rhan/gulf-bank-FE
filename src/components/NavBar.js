@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-
-import UserModal from "./UserModal";
-import { observer } from "mobx-react";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import logo from "../images/logo.png";
 
 const NavBar = () => {
   return (
-    <div className="nav-stuff">
-      <NavLink to="/">
-        <h3 className="logo">FOODIEZ</h3>
-      </NavLink>
-      <div className="navbar navbar-expand-lg navbar-dark trans-bg position-absolute top-0 end-0 px-5">
+    <div className="mynavbar">
+      <nav className="navbar navbar-expand-lg navbar-light trans-bg ">
         <div className="container-fluid">
+          <NavLink className="navbar-brand" to={"./"}>
+            <img className="logo" src={logo} alt="logo" />
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -25,29 +23,27 @@ const NavBar = () => {
           </button>
           <div className="collapse navbar-collapse " id="navbarNav">
             <ul className="navbar-nav">
-              <NavLink to="/" className="text-decoration-none">
-                <li className="nav-item nav-t">
-                  <p className="nav-link  active">Home</p>
-                </li>
-              </NavLink>
-              <NavLink to="/recipes" className="text-decoration-none">
-                <li className="nav-item nav-t">
-                  <p className="nav-link active">Recipes</p>
-                </li>
-              </NavLink>
-              <NavLink to="/" className="text-decoration-none ">
-                <li className="nav-item nav-t"></li>
-              </NavLink>
-
-              <li className="nav-item nav-t">
-                <UserModal />
+              <li className="nav-item">
+                <NavLink className="nav-link fs-4" to={"./"}>
+                  Home
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link fs-4" to={"./account"}>
+                  Account
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link fs-4" to={"./dashboard"}>
+                  Dashboard
+                </NavLink>
               </li>
             </ul>
           </div>
         </div>
-      </div>
+      </nav>
     </div>
   );
 };
 
-export default observer(NavBar);
+export default NavBar;
