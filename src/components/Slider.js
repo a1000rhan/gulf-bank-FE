@@ -14,7 +14,6 @@ const Slider = () => {
         infiniteLoop={true}
         emulateTouch={true}
         showThumbs={false}
-        showThumbs={true}
         renderIndicator={false}
         className="carousel"
       >

@@ -1,0 +1,12 @@
+.charts {
+  display: flex;
+  justify-content: space-around;
+}
+.chart {
+  text-align: center;
+}
+.vl {
+  margin-top: 70px;
+  border-left: 2px solid gray;
+  height: 100px;
+}

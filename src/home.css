@@ -14,7 +14,7 @@
 .card-contain {
   width: 700px;
   margin: 20px;
-  margin-left: 35%;
+  margin-left: 30%;
   transition: 0.2s;
   border-radius: 7%;
   cursor: pointer;
@@ -47,10 +47,4 @@
   font-size: 20px;
   font-weight: bold;
   margin-right: 20px;
-}
-.vl {
-  margin-left: 100px;
-  margin-right: 100px;
-  border-left: 2px solid gray;
-  height: 50px;
 }
