@@ -22,7 +22,7 @@ function SignInModal() {
     <>
       <Button
         variant="outline-primary"
-        className="delete"
+        className="btn-reg"
         onClick={() => setIsOpen(true)}
       >
         Sign in

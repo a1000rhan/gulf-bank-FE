@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
+import SignInModal from "./SignInModal";
+import SignUpModal from "./SignUpModal";
 
 const NavBar = () => {
   return (
@@ -39,9 +41,14 @@ const NavBar = () => {
                 </NavLink>
               </li>
             </ul>
+            <div className="button"></div>
           </div>
         </div>
       </nav>
+      <div>
+        <SignInModal />
+        <SignUpModal />
+      </div>
     </div>
   );
 };

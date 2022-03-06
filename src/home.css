@@ -12,17 +12,17 @@
 }
 
 .card-contain {
-  width: 650px;
+  width: 700px;
   margin: 20px;
   margin-left: 35%;
   transition: 0.2s;
   border-radius: 7%;
   cursor: pointer;
 }
-
 .card-contain:hover {
-  width: 700px;
+  width: 710px;
 }
+
 .continer {
   display: flex;
   justify-content: center;

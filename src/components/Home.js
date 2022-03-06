@@ -9,7 +9,6 @@ const Home = () => {
       <div className="mainContainer">
         <Slider className="slider" />
       </div>
-
       <hr className="line" />
       <div className="continer">
         <div className="hero">
