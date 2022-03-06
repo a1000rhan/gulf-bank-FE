@@ -7,3 +7,25 @@
   display: flex;
   align-items: flex-end;
 }
+.btn-reg {
+  margin: 10px;
+  color: #fff;
+  height: 40px;
+  width: 160px;
+  border: none;
+  font-size: 20px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: bold;
+  background-color: #eeb004;
+  cursor: pointer;
+  font-stretch: extra-expanded;
+  transition: 0.2s;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.btn-reg:hover {
+  color: #000;
+  background-color: #ffe190;
+}
+.nav-t {
+  margin-left: 10px;
+}
