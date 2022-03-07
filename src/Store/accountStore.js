@@ -1,4 +1,5 @@
 import { makeAutoObservable, configure } from "mobx";
+import authStore from "./authStore";
 import api from "./api";
 configure({
   enforceActions: "never",
@@ -12,7 +13,10 @@ class AccountStore {
   fetchAccounts = async () => {
     try {
       const response = await api.get("/accounts");
-      this.accounts = response.data;
+      this.accounts = response.data.filter(
+        (account) => account.owner._id === authStore.user._id
+      );
+
       this.loading = false;
     } catch (error) {
       console.log(error);
@@ -27,3 +31,6 @@ class AccountStore {
     }
   };
 }
+let accountStore = new AccountStore();
+accountStore.fetchAccounts();
+export default accountStore;
