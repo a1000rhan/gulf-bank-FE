@@ -41,7 +41,7 @@ class AuthStore {
       console.log(error);
     }
   };
-  signIn = async (user) => {
+  signIn = async (user, setIsOpen) => {
     try {
       const response = await api.post("/signin", user);
       console.log(
@@ -49,6 +49,7 @@ class AuthStore {
         response.data
       );
       this.setUser(response.data.token);
+      setIsOpen(false);
     } catch (error) {}
   };
 

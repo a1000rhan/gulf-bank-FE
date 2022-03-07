@@ -14,8 +14,7 @@ function SignInModal() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    authStore.signIn(user);
-    setIsOpen(false);
+    authStore.signIn(user, setIsOpen);
   };
 
   return (
