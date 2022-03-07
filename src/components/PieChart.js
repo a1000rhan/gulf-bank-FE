@@ -72,7 +72,7 @@ const PieChart = ({ number }) => {
       stroke: {
         lineCap: "round",
       },
-      labels: ["Percent"],
+      labels: ["Number"],
     },
     seriesRadial: [number],
   });

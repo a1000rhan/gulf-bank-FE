@@ -1,12 +1,14 @@
 import dashboard from "../dashboard.css";
 import React, { useState } from "react";
 import { Modal, Button, Form, InputGroup } from "react-bootstrap";
+import beneficiaryStore from "../Store/beneficiaryStore";
 
 const BeneficiaryModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [beneficiary, setBeneficiary] = useState({
     fullname: "",
     IBAN: 0,
+    address: "",
   });
   const handChange = (event) => {
     return setBeneficiary({
@@ -17,7 +19,7 @@ const BeneficiaryModal = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    beneficiaryStore.addBeneficiary(beneficiary);
     setIsOpen(false);
   };
   return (
@@ -34,7 +36,7 @@ const BeneficiaryModal = () => {
             <InputGroup>
               <InputGroup.Text>Full Name</InputGroup.Text>
               <Form.Control
-                name="firstName"
+                name="fullname"
                 type="text"
                 placeholder="Full Name"
                 onChange={handChange}
@@ -45,9 +47,19 @@ const BeneficiaryModal = () => {
             <InputGroup>
               <InputGroup.Text>IBAN</InputGroup.Text>
               <Form.Control
-                name="phoneNumber"
+                name="IBAN"
                 type="text"
-                placeholder="Phone Number"
+                placeholder="IBAN"
+                onChange={handChange}
+              />
+            </InputGroup>
+            <br />
+            <InputGroup>
+              <InputGroup.Text>Address</InputGroup.Text>
+              <Form.Control
+                name="address"
+                type="text"
+                placeholder="address"
                 onChange={handChange}
               />
             </InputGroup>

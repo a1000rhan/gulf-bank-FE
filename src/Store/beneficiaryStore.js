@@ -3,7 +3,7 @@ import api from "./api";
 configure({
   enforceActions: "never",
 });
-class AccountStore {
+class BeneficiaryStore {
   beneficiary = [];
   loading = true;
   constructor() {
@@ -27,3 +27,6 @@ class AccountStore {
     }
   };
 }
+let beneficiaryStore = new BeneficiaryStore();
+beneficiaryStore.fetchBeneficiary();
+export default beneficiaryStore;

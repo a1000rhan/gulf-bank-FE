@@ -1,21 +1,32 @@
 import React from "react";
 import dashboard from "../dashboard.css";
+import beneficiaryStore from "../Store/beneficiaryStore";
 import BeneficiaryModal from "./BeneficiaryModal";
 import PieChart from "./PieChart";
+import { observer } from "mobx-react";
 
 const Dashboard = () => {
-  const number = 90;
+  const number = beneficiaryStore.beneficiary.length;
   const number2 = 20;
   const number3 = 50;
+  if (beneficiaryStore.loading) {
+    <h1>Loading</h1>;
+  }
   return (
     <div>
-      <div className="benf">
-        <BeneficiaryModal />
+      <div className="container">
+        <div className="accountTop">
+          <div className="header">
+            <h1 className="title">Dashboard</h1>
+            <BeneficiaryModal />
+          </div>
+        </div>
+        <hr className="titleUnderline" />
       </div>
       <div className="charts">
         <div className="chart">
           <PieChart number={number} />
-          <h5>Number of Transaction</h5>
+          <h5>Number of Beneficiary</h5>
         </div>
         <div className="vl"></div>
         <div className="chart">
@@ -32,4 +43,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default observer(Dashboard);
