@@ -1,5 +1,6 @@
 import React from "react";
 import dashboard from "../dashboard.css";
+import BeneficiaryModal from "./BeneficiaryModal";
 import PieChart from "./PieChart";
 
 const Dashboard = () => {
@@ -8,6 +9,9 @@ const Dashboard = () => {
   const number3 = 50;
   return (
     <div>
+      <div className="benf">
+        <BeneficiaryModal />
+      </div>
       <div className="charts">
         <div className="chart">
           <PieChart number={number} />

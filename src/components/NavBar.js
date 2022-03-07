@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../images/logo.png";
+import logo from "../images/logo.svg";
 import authStore from "../Store/authStore";
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
@@ -9,8 +9,8 @@ import { observer } from "mobx-react";
 
 const NavBar = () => {
   return (
-    <div className="mynavbar">
-      <nav className="navbar navbar-expand-lg navbar-light navbg ">
+    <div className="mynavbar navbg">
+      <nav className="navbar navbar-expand-lg navbar-dark  ">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to={"./"}>
             <img className="logo" src={logo} alt="logo" />
