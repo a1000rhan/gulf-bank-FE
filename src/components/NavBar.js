@@ -10,7 +10,7 @@ import { observer } from "mobx-react";
 const NavBar = () => {
   return (
     <div className="mynavbar">
-      <nav className="navbar navbar-expand-lg navbar-light ">
+      <nav className="navbar navbar-expand-lg navbar-light navbg ">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to={"./"}>
             <img className="logo" src={logo} alt="logo" />
