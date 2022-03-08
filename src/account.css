@@ -22,6 +22,7 @@
   height: 200px;
   margin-bottom: 20px;
 }
+
 .cardNumber {
   position: absolute;
   margin-left: 36px;
@@ -65,7 +66,21 @@
   width: 350px;
   height: 200px;
   display: flex;
+  transition: 0.2s;
+}
+.card-box:hover {
+  width: 370px;
+  height: 220px;
 }
 .error {
   color: red;
+}
+.container-Detail {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  flex-direction: column;
+}
+.borderTabel {
+  border: 2px solid #000;
 }

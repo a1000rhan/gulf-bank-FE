@@ -63,7 +63,7 @@ const Dashboard = () => {
       <hr />
       <div className="w-50">
         <h1 className="title">Beneficiary</h1>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">#</th>
