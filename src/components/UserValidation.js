@@ -9,7 +9,7 @@ export const schema = yup.object({
 
   password: yup.string().min(1).required("please enter your password"),
 });
-const signupSchema = schema.shape({
+export const signupSchema = schema.shape({
   firstName: yup.string().min(1).required("please enter your first name"),
   lastName: yup.string().min(1).required("please enter your last name"),
   phoneNumber: yup
@@ -22,10 +22,4 @@ const signupSchema = schema.shape({
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "please enter your email"
     ),
-  civilId: yup
-    .mixed()
-    .required("please provide your Civil ID as Picture")
-    .test("fileSize", "The file is too large", (value) => {
-      return value && value[0].size <= 2000000;
-    }),
 });

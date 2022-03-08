@@ -3,12 +3,19 @@ import authStore from "../Store/authStore";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "./UserValidation";
+import { signupSchema } from "./UserValidation";
 
 function SignUpModal() {
   const [isOpen, setIsOpen] = useState(false);
-  console.log("🚀 ~ file: SignUpModal.js ~ line 7 ~ schema", schema);
+  console.log("🚀 ~ file: SignUpModal.js ~ line 7 ~ schema", signupSchema);
 
+  const [image, setImage] = useState({
+    civilId: "",
+  });
+  console.log(
+    "🚀 ~ file: SignUpModal.js ~ line 13 ~ SignUpModal ~ image",
+    image
+  );
   // const [user, setUser] = useState({
   //   username: "",
   //   firstName: "",
@@ -26,19 +33,22 @@ function SignUpModal() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(signupSchema) });
   const onSubmit = (data) => {
     console.log(data);
-    authStore.signUp(data, setIsOpen);
+    const obj = { ...data, civilId: image.civilId };
+    // data.civilId = image.civilId
+    authStore.signUp(obj, setIsOpen);
+    console.log("🚀 ~ file: SignUpModal.js ~ line 41 ~ onSubmit ~ obj", obj);
   };
   // const handelChange = (event) => {
   //   console.log(user);
   //   return setUser({ ...user, [event.target.name]: event.target.value });
   // };
 
-  // const handleImage = (event) => {
-  //   setUser({ ...user, civilId: event.target.files[0] });
-  // };
+  const handleImage = (event) => {
+    setImage({ ...image, civilId: event.target.files[0] });
+  };
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -116,8 +126,8 @@ function SignUpModal() {
                 name="civilId"
                 type="file"
                 placeholder="Upload your Civil ID"
-                // onChange={handleImage}
-                {...register("civilId")}
+                onChange={handleImage}
+                // {...register("civilId")}
               />
             </InputGroup>
             <p className="error">{errors.civilId?.message}</p>

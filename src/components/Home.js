@@ -1,15 +1,19 @@
 import React from "react";
 import home from "../home.css";
+import authStore from "../Store/authStore";
 
 import Slider from "./Slider";
 
 const Home = () => {
+  console.log(authStore.user);
   return (
     <div>
       <div className="mainContainer">
         <Slider className="slider" />
       </div>
       <hr className="line" />
+      {/* <img src={authStore.user?.civilId} /> */}
+
       <div className="continer">
         <div className="hero">
           <div>

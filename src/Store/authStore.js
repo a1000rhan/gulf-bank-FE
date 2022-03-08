@@ -14,6 +14,10 @@ class AuthStore {
     localStorage.setItem("myToken", token);
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
+    console.log(
+      "🚀 ~ file: AuthStore.js ~ line 17 ~ AuthStore ~ setUser= ~ this.use",
+      this.user
+    );
   };
 
   signUp = async (newUser) => {
