@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 const schema = yup.object().shape({
   nickName: yup
     .string()
-    .matches(/^[A-Z]+$/i, "must be only letters")
+    .matches(/^[a-zA-Z_ ]*$/, "must be only letters")
     .required("Should be only letters"),
   balance: yup
     .number()
@@ -16,20 +16,22 @@ const schema = yup.object().shape({
     .required("Invalid balance"),
 });
 function AccountModal() {
-  const [account, setAccount] = useState({ nickName: "", balance: "" });
+  //   const [account, setAccount] = useState({ nickName: "", balance: "" });
   const [isOpen, setIsOpen] = useState(false);
   const [check, setCheck] = useState(false);
-  const handleChange = (event) => {
-    console.log(account);
-    return setAccount({ ...account, [event.target.name]: event.target.value });
-  };
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+  //   const handleChange = (event) => {
+  //     console.log(account);
+  //     return setAccount({ ...account, [event.target.name]: event.target.value });
+  //   };
   const onSubmit = (data) => {
+    console.log(data);
     accountStore.addAccount(data, setIsOpen);
+    setCheck(false);
   };
 
   return (
@@ -51,39 +53,37 @@ function AccountModal() {
               <InputGroup.Text>Account name</InputGroup.Text>
               <Form.Control
                 {...register("nickName")}
-                name="nickName"
                 type="text"
                 placeholder="Account name"
               />
             </InputGroup>
+
             <p className="error">{errors.nickName?.message}</p>
-            <br />
+
             <InputGroup>
               <InputGroup.Text>Account Balance</InputGroup.Text>
               <Form.Control
                 {...register("balance")}
-                name="balance"
-                type="number"
+                type="text"
                 min={0}
                 placeholder="Balance"
               />
-              <p className="error">{errors.balance?.message}</p>
             </InputGroup>
-            <br />
+            <p className="error">{errors.balance?.message}</p>
+
             <Form.Check
               type="checkbox"
               onClick={() => (check ? setCheck(false) : setCheck(true))}
               label="Accept terms and conditions"
             />
+            {check && (
+              <Button type="submit" variant="primary">
+                Create
+              </Button>
+            )}
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          {check && (
-            <Button type="submit" variant="primary">
-              Create
-            </Button>
-          )}
-        </Modal.Footer>
+        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );
