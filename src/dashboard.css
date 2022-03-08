@@ -1,3 +1,9 @@
+.container-dash {
+  width: 80%;
+}
+.container-charts {
+  text-align: center;
+}
 .charts {
   display: flex;
   justify-content: space-around;
