@@ -15,7 +15,7 @@ class BeneficiaryStore {
       const response = await api.get("/beneficiary");
 
       this.beneficiary = response.data.filter(
-        (beneficiary) => beneficiary.owner._id === authStore.user._id
+        (beneficiary) => beneficiary.owner === authStore.user._id
       );
 
       this.beneficiary = response.data;

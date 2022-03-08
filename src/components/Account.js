@@ -9,7 +9,7 @@ const Account = () => {
   const accounts = accountStore.accounts.map((account) => (
     <AccountItem account={account} key={account._id} />
   ));
-  console.log(accounts);
+
   return (
     <div>
       <div className="container">

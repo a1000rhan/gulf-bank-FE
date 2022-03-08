@@ -24,20 +24,28 @@ const Dashboard = () => {
   const number = beneficiaryStore.beneficiary.length;
   const number2 = accountStore.accounts.length;
   const number3 = 50;
+  console.log(
+    "🚀 ~ file: Dashboard.js ~ line 26 ~ Dashboard ~ accountStore.accounts",
+    authStore.user
+  );
+
   if (beneficiaryStore.loading) {
     <h1>Loading</h1>;
   }
   let counter = 1;
-  const beneficiaryArray = beneficiaryStore.beneficiary.map((beneficiary) => (
-    <tr>
-      <th scope="row">{counter}</th>
-      <td>{beneficiary.fullname}</td>
-      <td>{beneficiary.IBAN}</td>
-      <td>{beneficiary.bankName}</td>
-      <td>{beneficiary.address}</td>
-      <div className="d-none">{counter++}</div>
-    </tr>
-  ));
+
+  const beneficiaryArray = beneficiaryStore.beneficiary
+    .filter((benf) => benf.owner === authStore.user._id)
+    .map((beneficiary) => (
+      <tr>
+        <th scope="row">{counter}</th>
+        <td>{beneficiary.fullname}</td>
+        <td>{beneficiary.IBAN}</td>
+        <td>{beneficiary.bankName}</td>
+        <td>{beneficiary.address}</td>
+        <div className="d-none">{counter++}</div>
+      </tr>
+    ));
   return (
     <div className="container">
       <div>

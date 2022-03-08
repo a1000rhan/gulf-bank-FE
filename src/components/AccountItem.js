@@ -8,7 +8,6 @@ import card2 from "../images/card-empty-red.png";
 import card3 from "../images/card-empty-black.png";
 function AccountItem({ account }) {
   if (accountStore.loading) return <h1>loading</h1>;
-  console.log(account.accountNumber);
 
   const cards = [card1, card2, card3];
 
