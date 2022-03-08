@@ -7,9 +7,12 @@ import account from "../account.css";
 const AccountDetails = () => {
   const { accountslug } = useParams();
   const account = accountStore.accounts.find((acc) => acc.slug === accountslug);
+  const TransactionsArray = account.transactions.map((trans) => trans);
   return (
     <div className="container-Detail">
-      <div className="w-25 m-4 borderTabel">
+      <h1 className="title">Account Details</h1>
+      <hr />
+      <div className="w-25 m-6 borderTabel">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -25,7 +28,7 @@ const AccountDetails = () => {
           <tbody>
             <tr>
               <th scope="row">Transactions</th>
-              <td>TransactionsArray</td>
+              <td>{TransactionsArray}</td>
             </tr>
           </tbody>
         </table>
