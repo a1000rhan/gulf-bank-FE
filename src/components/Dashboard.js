@@ -15,6 +15,12 @@ import {
 import authStore from "../Store/authStore";
 
 const Dashboard = () => {
+  const totalbalance = accountStore.accounts;
+  console.log(
+    "🚀 ~ file: Dashboard.js ~ line 19 ~ Dashboard ~ accountStore.accounts",
+    accountStore.accounts
+  );
+
   const number = beneficiaryStore.beneficiary.length;
   const number2 = accountStore.accounts.length;
   const number3 = 50;
