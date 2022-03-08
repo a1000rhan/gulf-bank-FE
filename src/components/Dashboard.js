@@ -15,6 +15,12 @@ import {
 import authStore from "../Store/authStore";
 
 const Dashboard = () => {
+  const totalbalance = accountStore.accounts;
+  console.log(
+    "🚀 ~ file: Dashboard.js ~ line 19 ~ Dashboard ~ accountStore.accounts",
+    accountStore.accounts
+  );
+
   const number = beneficiaryStore.beneficiary.length;
   const number2 = accountStore.accounts.length;
   const number3 = 50;
@@ -63,7 +69,7 @@ const Dashboard = () => {
       <hr />
       <div className="w-50">
         <h1 className="title">Beneficiary</h1>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">#</th>
