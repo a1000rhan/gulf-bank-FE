@@ -50,7 +50,7 @@ const Home = () => {
           <div>
             <img
               className="icon"
-              src="https://cdn-icons.flaticon.com/png/512/924/premium/924961.png?token=exp=1646565098~hmac=5c6ba5babcb5aca0bee5a8c584780b32"
+              src="https://cdn-icons-png.flaticon.com/512/662/662622.png"
               alt="card"
             />
             <p className="icon-name">Branches</p>
