@@ -112,7 +112,7 @@ function SignUpModal() {
               <InputGroup.Text>Phone Number</InputGroup.Text>
               <Form.Control
                 name="phoneNumber"
-                type="number"
+                type="text"
                 placeholder="Phone Number"
                 {...register("phoneNumber")}
                 // onChange={handelChange}
