@@ -8,6 +8,7 @@ const BeneficiaryModal = () => {
   const [beneficiary, setBeneficiary] = useState({
     fullname: "",
     IBAN: 0,
+    bankName: "",
     address: "",
   });
   const handChange = (event) => {
@@ -50,6 +51,16 @@ const BeneficiaryModal = () => {
                 type="text"
                 placeholder="IBAN"
                 required={true}
+                onChange={handChange}
+              />
+            </InputGroup>
+            <br />
+            <InputGroup>
+              <InputGroup.Text>Bank Name</InputGroup.Text>
+              <Form.Control
+                name="bankName"
+                type="text"
+                placeholder="Bank Name"
                 onChange={handChange}
               />
             </InputGroup>
