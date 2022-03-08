@@ -5,18 +5,19 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-// import schema from "./UserValidation";
-const schema = yup.object().shape({
-  username: yup
-    .string()
-    .min(4)
-    .max(15)
-    .required("please enter your username must be between 4 and 15 charecters"),
+import { schema } from "./UserValidation";
+// const schema = yup.object().shape({
+//   username: yup
+//     .string()
+//     .min(4)
+//     .max(15)
+//     .required("please enter your username must be between 4 and 15 charecters"),
 
-  password: yup.string().min(1).required("please enter your password"),
-});
+//   password: yup.string().min(1).required("please enter your password"),
+// });
 function SignInModal() {
   const [isOpen, setIsOpen] = useState(false);
+  console.log("🚀 ~ file: SignInModal.js ~ line 9 ~ schema", schema);
 
   // const [user, setUser] = useState({
   //   username: "",
@@ -65,7 +66,7 @@ function SignInModal() {
                 // onChange={handChange}
               />
             </InputGroup>
-            {/* <p className="error">{errors.username?.message}</p> */}
+            <p className="error">{errors.username?.message}</p>
             {/* <br /> */}
             <InputGroup>
               <InputGroup.Text>Password</InputGroup.Text>
@@ -78,7 +79,7 @@ function SignInModal() {
                 // onChange={handChange}
               />
             </InputGroup>
-            {/* <p className="error">{errors.password?.message}</p> */}
+            <p className="error">{errors.password?.message}</p>
             <br />
             <Button type="submit" variant="primary">
               Sign In

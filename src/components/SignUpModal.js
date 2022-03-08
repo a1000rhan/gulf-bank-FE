@@ -3,10 +3,11 @@ import authStore from "../Store/authStore";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import schema from "./UserValidation";
+import { schema } from "./UserValidation";
 
 function SignUpModal() {
   const [isOpen, setIsOpen] = useState(false);
+  console.log("🚀 ~ file: SignUpModal.js ~ line 7 ~ schema", schema);
 
   // const [user, setUser] = useState({
   //   username: "",

@@ -1,10 +1,15 @@
 import * as yup from "yup";
-const schema = yup.object().shape({
+
+export const schema = yup.object({
   username: yup
     .string()
     .min(4)
     .max(15)
     .required("please enter your username must be between 4 and 15 charecters"),
+
+  password: yup.string().min(1).required("please enter your password"),
+});
+const signupSchema = schema.shape({
   firstName: yup.string().min(1).required("please enter your first name"),
   lastName: yup.string().min(1).required("please enter your last name"),
   phoneNumber: yup
@@ -23,6 +28,4 @@ const schema = yup.object().shape({
     .test("fileSize", "The file is too large", (value) => {
       return value && value[0].size <= 2000000;
     }),
-  password: yup.string().min(1).required("please enter your password"),
 });
-export default schema;
