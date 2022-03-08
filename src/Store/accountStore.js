@@ -22,10 +22,11 @@ class AccountStore {
       console.log(error);
     }
   };
-  addAccount = async (newAccount) => {
+  addAccount = async (newAccount, setIsOpen) => {
     try {
       const response = await api.post("/accounts", newAccount);
       this.accounts.push(response.data);
+      setIsOpen(false);
     } catch (error) {
       console.log(error);
     }
