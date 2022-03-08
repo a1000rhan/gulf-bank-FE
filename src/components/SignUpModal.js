@@ -1,33 +1,50 @@
 import { Modal, Button, Form, InputGroup } from "react-bootstrap";
 import authStore from "../Store/authStore";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import schema from "./UserValidation";
 
 function SignUpModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState({
-    username: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    phoneNumber: 0,
-    civilId: "",
-    email: "",
-  });
-  const handChange = (event) => {
-    console.log(user);
-    return setUser({ ...user, [event.target.name]: event.target.value });
-  };
 
-  const handleImage = (event) => {
-    setUser({ ...user, civilId: event.target.files[0] });
+  // const [user, setUser] = useState({
+  //   username: "",
+  //   firstName: "",
+  //   lastName: "",
+  //   password: "",
+  //   phoneNumber: 0,
+  //   civilId: "",
+  //   email: "",
+  // })
+  // =useForm({resolver: yupResolver(schema)});
+  //   const onSubmit = (data) =>{
+  //       console.log(data);
+  //   }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+  const onSubmit = (data) => {
+    console.log(data);
+    authStore.signUp(data, setIsOpen);
   };
+  // const handelChange = (event) => {
+  //   console.log(user);
+  //   return setUser({ ...user, [event.target.name]: event.target.value });
+  // };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // const handleImage = (event) => {
+  //   setUser({ ...user, civilId: event.target.files[0] });
+  // };
 
-    authStore.signUp(user);
-    setIsOpen(false);
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+
+  //   authStore.signUp(user);
+  //   setIsOpen(false);
+  // };
 
   return (
     <>
@@ -43,83 +60,96 @@ function SignUpModal() {
           <Modal.Title>Sign up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup>
               <InputGroup.Text>UserName</InputGroup.Text>
               <Form.Control
                 name="username"
                 type="text"
                 placeholder="Username"
-                onChange={handChange}
+                {...register("username")}
+                // onChange={handelChange}
               />
             </InputGroup>
-            <br />
+            <p className="error">{errors.username?.message}</p>
+            {/* <br /> */}
             <InputGroup>
               <InputGroup.Text>First Name</InputGroup.Text>
               <Form.Control
                 name="firstName"
                 type="text"
                 placeholder="First Name"
-                onChange={handChange}
+                {...register("firstName")}
+                // onChange={handelChange}
               />
             </InputGroup>
-            <br />
+            <p className="error">{errors.firstname?.message}</p>
+            {/* <br /> */}
             <InputGroup>
               <InputGroup.Text>Last Name</InputGroup.Text>
               <Form.Control
                 name="lastName"
                 type="text"
                 placeholder="Last Name"
-                onChange={handChange}
+                {...register("lastName")}
+                // onChange={handelChange}
               />
             </InputGroup>
-            <br />
+            <p className="error">{errors.lastName?.message}</p>
+            {/* <br /> */}
             <InputGroup>
               <InputGroup.Text>Phone Number</InputGroup.Text>
               <Form.Control
                 name="phoneNumber"
                 type="number"
                 placeholder="Phone Number"
-                onChange={handChange}
+                {...register("phoneNumber")}
+                // onChange={handelChange}
               />
             </InputGroup>
-            <br />
+            <p className="error">{errors.phoneNumber?.message}</p>
+            {/* <br /> */}
             <InputGroup>
               <InputGroup.Text>Civil ID</InputGroup.Text>
               <Form.Control
                 name="civilId"
                 type="file"
                 placeholder="Upload your Civil ID"
-                onChange={handleImage}
+                // onChange={handleImage}
+                {...register("civilId")}
               />
             </InputGroup>
-            <br />
+            <p className="error">{errors.civilId?.message}</p>
+            {/* <br /> */}
             <InputGroup>
               <InputGroup.Text>Password</InputGroup.Text>
               <Form.Control
                 name="password"
                 type="password"
                 placeholder="password here"
-                onChange={handChange}
+                // onChange={handelChange}
+                {...register("password")}
               />
             </InputGroup>
-            <br />
+            <p className="error">{errors.password?.message}</p>
+            {/* <br /> */}
             <InputGroup>
               <InputGroup.Text>Email</InputGroup.Text>
               <Form.Control
                 name="email"
                 type="text"
                 placeholder="email here"
-                onChange={handChange}
+                // onChange={handelChange}
+                {...register("email")}
               />
             </InputGroup>
+            <p className="error">{errors.email?.message}</p>
+            <Button type="submit" variant="primary">
+              Submit
+            </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleSubmit}>
-            Submit
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );
