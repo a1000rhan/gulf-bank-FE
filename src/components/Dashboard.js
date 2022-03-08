@@ -4,10 +4,11 @@ import beneficiaryStore from "../Store/beneficiaryStore";
 import BeneficiaryModal from "./BeneficiaryModal";
 import PieChart from "./PieChart";
 import { observer } from "mobx-react";
+import accountStore from "../Store/accountStore";
 
 const Dashboard = () => {
   const number = beneficiaryStore.beneficiary.length;
-  const number2 = 20;
+  const number2 = accountStore.accounts.length;
   const number3 = 50;
   if (beneficiaryStore.loading) {
     <h1>Loading</h1>;
@@ -31,7 +32,7 @@ const Dashboard = () => {
         <div className="vl"></div>
         <div className="chart">
           <PieChart number={number2} />
-          <h5>Number of Payments</h5>
+          <h5>Number of Accounts</h5>
         </div>
         <div className="vl"></div>
         <div className="chart">

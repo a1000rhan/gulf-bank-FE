@@ -19,8 +19,7 @@ const BeneficiaryModal = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    beneficiaryStore.addBeneficiary(beneficiary);
-    setIsOpen(false);
+    beneficiaryStore.addBeneficiary(beneficiary, setIsOpen);
   };
   return (
     <>
@@ -50,6 +49,7 @@ const BeneficiaryModal = () => {
                 name="IBAN"
                 type="text"
                 placeholder="IBAN"
+                required={true}
                 onChange={handChange}
               />
             </InputGroup>
@@ -66,7 +66,7 @@ const BeneficiaryModal = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleSubmit}>
+          <Button type="submit" variant="primary" onClick={handleSubmit}>
             Add
           </Button>
         </Modal.Footer>

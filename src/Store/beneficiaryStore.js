@@ -18,10 +18,11 @@ class BeneficiaryStore {
       console.log(error);
     }
   };
-  addBeneficiary = async (newBeneficiary) => {
+  addBeneficiary = async (newBeneficiary, setIsOpen) => {
     try {
       const response = await api.post("/beneficiary", newBeneficiary);
       this.beneficiary.push(response.data);
+      setIsOpen(false);
     } catch (error) {
       console.log(error);
     }
