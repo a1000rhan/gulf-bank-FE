@@ -1,18 +1,37 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, InputGroup } from "react-bootstrap";
 import accountStore from "../Store/accountStore";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+const schema = yup.object().shape({
+  nickName: yup
+    .string()
+    .matches(/^[a-zA-Z_ ]*$/, "must be only letters")
+    .required("Should be only letters"),
+  balance: yup
+    .number()
+    .min(0)
+    .typeError("Should be numbers more than 0")
+    .required("Invalid balance"),
+});
 function AccountModal() {
-  const [account, setAccount] = useState({ nickName: "", balance: "" });
+  //   const [account, setAccount] = useState({ nickName: "", balance: "" });
   const [isOpen, setIsOpen] = useState(false);
   const [check, setCheck] = useState(false);
-  const handleChange = (event) => {
-    console.log(account);
-    return setAccount({ ...account, [event.target.name]: event.target.value });
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    accountStore.addAccount(account);
-    setIsOpen(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+  //   const handleChange = (event) => {
+  //     console.log(account);
+  //     return setAccount({ ...account, [event.target.name]: event.target.value });
+  //   };
+  const onSubmit = (data) => {
+    console.log(data);
+    accountStore.addAccount(data, setIsOpen);
+    setCheck(false);
   };
 
   return (
@@ -29,43 +48,42 @@ function AccountModal() {
           <Modal.Title>Create account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup>
               <InputGroup.Text>Account name</InputGroup.Text>
               <Form.Control
-                name="nickName"
+                {...register("nickName")}
                 type="text"
                 placeholder="Account name"
-                onChange={handleChange}
               />
             </InputGroup>
 
-            <br />
+            <p className="error">{errors.nickName?.message}</p>
+
             <InputGroup>
               <InputGroup.Text>Account Balance</InputGroup.Text>
               <Form.Control
-                name="balance"
-                type="number"
+                {...register("balance")}
+                type="text"
                 min={0}
                 placeholder="Balance"
-                onChange={handleChange}
               />
             </InputGroup>
-            <br />
+            <p className="error">{errors.balance?.message}</p>
+
             <Form.Check
               type="checkbox"
               onClick={() => (check ? setCheck(false) : setCheck(true))}
               label="Accept terms and conditions"
             />
+            {check && (
+              <Button type="submit" variant="primary">
+                Create
+              </Button>
+            )}
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          {check && (
-            <Button variant="primary" onClick={handleSubmit}>
-              Create
-            </Button>
-          )}
-        </Modal.Footer>
+        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );
