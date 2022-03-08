@@ -6,14 +6,25 @@ import account from "../account.css";
 
 const AccountDetails = () => {
   const { accountslug } = useParams();
+  let color = "";
   const account = accountStore.accounts.find((acc) => acc.slug === accountslug);
-  const TransactionsArray = account.transactions.map((trans) => trans);
+  const TransactionsArray = account.transactions.map((trans) => (
+    <div>
+      <div className="d-none">
+        {trans.method === "transfer" ? (color = "red") : (color = "green")}
+      </div>
+
+      <td>amount: {trans.amount} KD &nbsp;&nbsp; method: </td>
+      <td className={color}>{trans.method.toUpperCase()}</td>
+    </div>
+  ));
+
   return (
     <div className="container-Detail">
       <h1 className="title">Account Details</h1>
       <hr />
-      <div className="w-25 m-6 borderTabel">
-        <table class="table table-striped">
+      <div className="w-50 m-6 borderTabel">
+        <table class="table table-light">
           <thead>
             <tr>
               <th scope="col">Account Name</th>
