@@ -1,9 +1,15 @@
 import * as yup from "yup";
 const schema = yup.object().shape({
-  username: yup.string().min(4).max(15).required("please enter your username"),
+  username: yup
+    .string()
+    .min(4)
+    .max(15)
+    .required("please enter your username must be between 4 and 15 charecters"),
   firstName: yup.string().min(1).required("please enter your first name"),
   lastName: yup.string().min(1).required("please enter your last name"),
-  phoneNumber: yup.string().matches(/^[0-9]{8}$/g, "enter your phone number"),
+  phoneNumber: yup
+    .string()
+    .matches(/^[0-9]{8}$/g, "The phone number must be 8 Digits"),
   email: yup
     .string()
     .min(1)

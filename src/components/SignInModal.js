@@ -1,20 +1,42 @@
 import { Modal, Button, Form, InputGroup } from "react-bootstrap";
 import React, { useState } from "react";
 import authStore from "../Store/authStore";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
+// import schema from "./UserValidation";
+const schema = yup.object().shape({
+  username: yup
+    .string()
+    .min(4)
+    .max(15)
+    .required("please enter your username must be between 4 and 15 charecters"),
+
+  password: yup.string().min(1).required("please enter your password"),
+});
 function SignInModal() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-  });
-  const handChange = (event) =>
-    setUser({ ...user, [event.target.name]: event.target.value });
+  // const [user, setUser] = useState({
+  //   username: "",
+  //   password: "",
+  // });
+  // const handChange = (event) =>
+  //   setUser({ ...user, [event.target.name]: event.target.value });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    authStore.signIn(user, setIsOpen);
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   authStore.signIn(user, setIsOpen);
+  // };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+  const onSubmit = (data) => {
+    console.log(data);
+    authStore.signIn(data, setIsOpen);
   };
 
   return (
@@ -31,35 +53,39 @@ function SignInModal() {
           <Modal.Title>Sign in</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup>
               <InputGroup.Text>UserName</InputGroup.Text>
               <Form.Control
                 name="username"
-                value={user.username}
+                // value={user.username}
                 type="text"
                 placeholder="username here"
-                onChange={handChange}
+                {...register("username")}
+                // onChange={handChange}
               />
             </InputGroup>
-            <br />
+            {/* <p className="error">{errors.username?.message}</p> */}
+            {/* <br /> */}
             <InputGroup>
               <InputGroup.Text>Password</InputGroup.Text>
               <Form.Control
                 name="password"
-                value={user.password}
+                // value={user.password}
                 type="password"
                 placeholder="password here"
-                onChange={handChange}
+                {...register("password")}
+                // onChange={handChange}
               />
             </InputGroup>
+            {/* <p className="error">{errors.password?.message}</p> */}
+            <br />
+            <Button type="submit" variant="primary">
+              Sign In
+            </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleSubmit}>
-            Sign In
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );
