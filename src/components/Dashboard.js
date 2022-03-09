@@ -5,13 +5,7 @@ import BeneficiaryModal from "./BeneficiaryModal";
 import PieChart from "./PieChart";
 import { observer } from "mobx-react";
 import accountStore from "../Store/accountStore";
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-} from "@mui/material";
+
 import authStore from "../Store/authStore";
 
 const Dashboard = () => {
@@ -20,10 +14,6 @@ const Dashboard = () => {
     "🚀 ~ file: Dashboard.js ~ line 19 ~ Dashboard ~ accountStore.accounts",
     accountStore.accounts
   );
-
-  const number = beneficiaryStore.beneficiary.length;
-  const number2 = accountStore.accounts.length;
-  const number3 = 50;
   console.log(
     "🚀 ~ file: Dashboard.js ~ line 26 ~ Dashboard ~ accountStore.accounts",
     authStore.user
@@ -46,6 +36,14 @@ const Dashboard = () => {
         <div className="d-none">{counter++}</div>
       </tr>
     ));
+
+  const number = beneficiaryArray.length;
+  const number2 = accountStore.accounts.length;
+  console.log(
+    "🚀 ~ file: Dashboard.js ~ line 48 ~ Dashboard ~ accountStore.accounts.length",
+    accountStore.accounts
+  );
+  const number3 = 50;
   return (
     <div className="container">
       <div>

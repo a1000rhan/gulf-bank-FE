@@ -3,6 +3,7 @@ import React from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import accountStore from "../Store/accountStore";
 import account from "../account.css";
+import TransactionModal from "./TransactionModal";
 
 const AccountDetails = () => {
   const { accountslug } = useParams();
@@ -22,9 +23,11 @@ const AccountDetails = () => {
   return (
     <div className="container-Detail">
       <h1 className="title">Account Details</h1>
+      <TransactionModal currentAccount={account} />
+      <br />
       <hr />
       <div className="w-50 m-6 borderTabel">
-        <table class="table table-light">
+        <table className="table table-light">
           <thead>
             <tr>
               <th scope="col">Account Name</th>

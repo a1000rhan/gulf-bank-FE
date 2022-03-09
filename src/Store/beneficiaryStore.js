@@ -27,6 +27,7 @@ class BeneficiaryStore {
   addBeneficiary = async (newBeneficiary, setIsOpen) => {
     try {
       const response = await api.post("/beneficiary", newBeneficiary);
+
       this.beneficiary.push(response.data);
       setIsOpen(false);
     } catch (error) {
