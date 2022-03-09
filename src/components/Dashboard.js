@@ -75,7 +75,7 @@ const Dashboard = () => {
         <div className="vl"></div>
         <div className="chart">
           <PieChart number={number2} name={name2} />
-          <h5>Number of Accounts</h5>
+          <h5>Number of Transaction</h5>
         </div>
         <div className="vl"></div>
         <div className="chart">
