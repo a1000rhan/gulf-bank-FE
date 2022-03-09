@@ -25,14 +25,14 @@
 
 .cardNumber {
   position: absolute;
-  margin-left: 36px;
+  margin-left: 40px;
   margin-top: 100px;
   font-size: 20px;
   color: white;
 }
 .cardExp {
   position: absolute;
-  margin-left: 140px;
+  margin-left: 155px;
   margin-top: 140px;
   font-size: 15px;
   color: white;
@@ -40,7 +40,7 @@
 .cardName {
   position: absolute;
   margin-top: 170px;
-  margin-left: 35px;
+  margin-left: 40px;
   font-size: 15px;
   color: white;
 }
@@ -82,7 +82,13 @@
   flex-direction: column;
 }
 .borderTabel {
-  border: 2px solid #000;
   margin-left: 50px;
   margin-bottom: 20px;
+}
+
+.table-data {
+}
+
+.table-data td {
+  width: 170px;
 }

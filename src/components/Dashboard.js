@@ -5,9 +5,9 @@ import BeneficiaryModal from "./BeneficiaryModal";
 import PieChart from "./PieChart";
 import { observer } from "mobx-react";
 import accountStore from "../Store/accountStore";
-import { Button } from "react-bootstrap";
 
 import authStore from "../Store/authStore";
+import BeneficiaryTransfer from "./BeneficiaryTransfer";
 
 const Dashboard = () => {
   const totalbalance = accountStore.accounts.reduce(
@@ -23,7 +23,6 @@ const Dashboard = () => {
     <h1>Loading</h1>;
   }
   let counter = 1;
-
   const beneficiaryArray = beneficiaryStore.beneficiary
     .filter((benf) => benf.owner === authStore.user._id)
     .map((beneficiary) => (
@@ -34,7 +33,7 @@ const Dashboard = () => {
         <td>{beneficiary.bankName}</td>
         <td>{beneficiary.address}</td>
         <td>
-          <Button>Transfer</Button>
+          <BeneficiaryTransfer beneficiary={beneficiary} />
         </td>
         <div className="d-none">{counter++}</div>
       </tr>

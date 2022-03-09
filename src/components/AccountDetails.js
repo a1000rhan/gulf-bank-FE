@@ -2,22 +2,24 @@ import { Button } from "react-bootstrap";
 import React from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import accountStore from "../Store/accountStore";
-import account from "../account.css";
+import "../account.css";
 import TransactionModal from "./TransactionModal";
 import { observer } from "mobx-react";
-
+import moment from "moment";
 const AccountDetails = () => {
   const { accountslug } = useParams();
   let color = "";
   const account = accountStore.accounts.find((acc) => acc.slug === accountslug);
   const TransactionsArray = account.transactions.map((trans) => (
-    <div>
+    <div className="table-data">
       <div className="d-none">
-        {trans.method === "transfer" ? (color = "red") : (color = "green")}
+        {trans.method === "deposit" ? (color = "green") : (color = "red")}
       </div>
 
       <td>amount: {trans.amount} KD &emsp; </td>
       <td className={color}>method: {trans.method.toUpperCase()}</td>
+      <td>Date: {moment(trans.createdAt).format("YYYY-MM-DD")}</td>
+      <hr />
     </div>
   ));
 
@@ -28,7 +30,7 @@ const AccountDetails = () => {
       <br />
       <hr />
       <div className="w-50 m-6 borderTabel">
-        <table className="table table-light">
+        <table className="table ">
           <thead>
             <tr>
               <th scope="col">Account Name</th>
