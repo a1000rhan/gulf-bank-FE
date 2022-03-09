@@ -2,6 +2,7 @@ import dashboard from "../dashboard.css";
 import React, { useState } from "react";
 import { Modal, Button, Form, InputGroup } from "react-bootstrap";
 import beneficiaryStore from "../Store/beneficiaryStore";
+import Swal from "sweetalert2";
 
 const BeneficiaryModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,13 @@ const BeneficiaryModal = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     beneficiaryStore.addBeneficiary(beneficiary, setIsOpen);
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Beneficiary has been Added Successfully ",
+      showConfirmButton: false,
+      timer: 3000,
+    });
   };
   return (
     <>

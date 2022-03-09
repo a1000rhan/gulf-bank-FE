@@ -4,6 +4,7 @@ import accountStore from "../Store/accountStore";
 import { observer } from "mobx-react";
 
 import transactionStore from "../Store/transactionStore";
+import Swal from "sweetalert2";
 
 const TransactionModal = ({ currentAccount }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,14 @@ const TransactionModal = ({ currentAccount }) => {
 
     transactionStore.addTransaction(transaction, currentAccount._id, setIsOpen);
     setTransaction({ method: "transfer", amount: 0, account: "" });
+    setTransaction({ method: "", amount: 0 });
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Your Transfer has been Completed Successfully ",
+      showConfirmButton: false,
+      timer: 3000,
+    });
   };
 
   const otherAccount = accountStore.accounts

@@ -10,14 +10,13 @@ import { Button } from "react-bootstrap";
 import authStore from "../Store/authStore";
 
 const Dashboard = () => {
-  const totalbalance = accountStore.accounts;
-  console.log(
-    "🚀 ~ file: Dashboard.js ~ line 19 ~ Dashboard ~ accountStore.accounts",
-    accountStore.accounts
+  const totalbalance = accountStore.accounts.reduce(
+    (total, account) => total + account.balance,
+    0
   );
   console.log(
-    "🚀 ~ file: Dashboard.js ~ line 26 ~ Dashboard ~ accountStore.accounts",
-    authStore.user
+    "🚀 ~ file: Dashboard.js ~ line 13 ~ Dashboard ~ totalbalance",
+    totalbalance
   );
 
   if (beneficiaryStore.loading) {
@@ -47,7 +46,11 @@ const Dashboard = () => {
     "🚀 ~ file: Dashboard.js ~ line 48 ~ Dashboard ~ accountStore.accounts.length",
     accountStore.accounts
   );
-  const number3 = 50;
+
+  const number3 = totalbalance;
+  const name1 = "Number";
+  const name2 = "Number";
+  const name3 = "Amount";
   return (
     <div className="container">
       <div>
@@ -61,18 +64,18 @@ const Dashboard = () => {
       </div>
       <div className="charts">
         <div className="chart">
-          <PieChart number={number} />
+          <PieChart number={number} name={name1} />
           <h5>Number of Beneficiary</h5>
         </div>
         <div className="vl"></div>
         <div className="chart">
-          <PieChart number={number2} />
+          <PieChart number={number2} name={name2} />
           <h5>Number of Accounts</h5>
         </div>
         <div className="vl"></div>
         <div className="chart">
-          <PieChart number={number3} />
-          <h5>Number of Payments</h5>
+          <PieChart number={number3} name={name3} />
+          <h5>Total Balance</h5>
         </div>
       </div>
       <br />

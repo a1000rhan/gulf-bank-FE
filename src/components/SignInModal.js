@@ -4,8 +4,20 @@ import authStore from "../Store/authStore";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBInput,
+  MDBBtn,
+  MDBIcon,
+  MDBModalFooter,
+} from "mdbreact";
 
 import { schema } from "./UserValidation";
+import Swal from "sweetalert2";
 // const schema = yup.object().shape({
 //   username: yup
 //     .string()
@@ -38,6 +50,13 @@ function SignInModal() {
   const onSubmit = (data) => {
     console.log(data);
     authStore.signIn(data, setIsOpen);
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Signed In Successfully ",
+      showConfirmButton: false,
+      timer: 3000,
+    });
   };
 
   return (
