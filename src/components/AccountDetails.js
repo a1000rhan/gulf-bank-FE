@@ -7,7 +7,6 @@ import TransactionModal from "./TransactionModal";
 import { observer } from "mobx-react";
 import moment from "moment";
 import SearchBar from "./SearchBar";
-import DatePicker from "react-datepicker";
 
 const AccountDetails = () => {
   const { accountslug } = useParams();
@@ -32,7 +31,7 @@ const AccountDetails = () => {
         <td>
           Method: <span className={color}>{trans.method.toUpperCase()}</span>
         </td>
-        <td>Date: {moment(trans.createdAt).format("YYYY-MM-DD")}</td>
+        <td>Date: {moment(trans.createdAt).format("DD-MM-YYYY")}</td>
         <hr />
       </div>
     ));
