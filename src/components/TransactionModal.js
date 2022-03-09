@@ -40,6 +40,14 @@ const TransactionModal = ({ currentAccount }) => {
     event.preventDefault();
     // transactionStore.addTransaction(transaction, currentAccountId, setIsOpen);
     // setTransaction({ method: "transfer", amount: 0, account: "" });
+
+    transactionStore.addTransaction(
+      transaction,
+      currentAccount._id,
+      Swal,
+      setIsOpen
+    );
+    setTransaction({ method: "transfer", amount: 0, account: "" });
   };
 
   const otherAccount = accountStore.accounts
@@ -51,6 +59,7 @@ const TransactionModal = ({ currentAccount }) => {
       <Button variant="outline-primary" onClick={() => setIsOpen(true)}>
         Make Transactions
       </Button>
+
       <Modal centered show={isOpen} onHide={() => setIsOpen(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Add Beneficiary</Modal.Title>

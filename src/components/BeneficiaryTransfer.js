@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Modal, Button, Form, InputGroup } from "react-bootstrap";
 import transactionStore from "../Store/transactionStore";
 import accountStore from "../Store/accountStore";
+import Swal from "sweetalert2";
+
 function BeneficiaryTransfer({ beneficiary }) {
   const [isOpen, setIsOpen] = useState(false);
   const [accountId, setAccountId] = useState("");
@@ -28,7 +30,7 @@ function BeneficiaryTransfer({ beneficiary }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    transactionStore.addTransaction(transaction, accountId, setIsOpen);
+    transactionStore.addTransaction(transaction, accountId, Swal, setIsOpen);
   };
   return (
     <>

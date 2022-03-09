@@ -16,7 +16,7 @@ class AuthStore {
     this.user = decode(token);
   };
 
-  signUp = async (newUser) => {
+  signUp = async (newUser, Swal, setIsOpen) => {
     try {
       const formData = new FormData();
       for (const key in newUser) formData.append(key, newUser[key]);
@@ -31,7 +31,23 @@ class AuthStore {
         response.data
       );
       this.setUser(response.data.token);
-    } catch (error) {}
+      setIsOpen(false);
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "You have Successfully Signed Up",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } catch (error) {
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: "Enter the right data",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
   };
   update = async (user) => {
     try {
@@ -41,7 +57,7 @@ class AuthStore {
       console.log(error);
     }
   };
-  signIn = async (user, setIsOpen) => {
+  signIn = async (user, Swal, setIsOpen) => {
     try {
       const response = await api.post("/signin", user);
       console.log(
@@ -49,8 +65,23 @@ class AuthStore {
         response.data
       );
       this.setUser(response.data.token);
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Signed In Successfully ",
+        showConfirmButton: false,
+        timer: 3000,
+      });
       setIsOpen(false);
-    } catch (error) {}
+    } catch (error) {
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: "Enter the right data",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
   };
 
   logout = () => {
