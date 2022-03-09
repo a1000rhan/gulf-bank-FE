@@ -14,10 +14,15 @@ class AccountStore {
   fetchAccounts = async () => {
     try {
       const response = await api.get("/accounts");
-      this.accounts = response.data.filter(
+
+      const tempAcc = response.data.filter(
         (account) => account.owner._id === authStore.user._id
       );
-      beneficiaryStore.fetchBeneficiary();
+      console.log(
+        "🚀 ~ file: accountStore.js ~ line 21 ~ AccountStore ~ fetchAccounts= ~ tempAcc",
+        tempAcc
+      );
+
       this.loading = false;
     } catch (error) {
       console.log(error);

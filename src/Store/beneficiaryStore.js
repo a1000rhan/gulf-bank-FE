@@ -18,7 +18,6 @@ class BeneficiaryStore {
         (beneficiary) => beneficiary.owner === authStore.user._id
       );
 
-      this.beneficiary = response.data;
       this.loading = false;
     } catch (error) {
       console.log(error);
@@ -42,6 +41,35 @@ class BeneficiaryStore {
         position: "top-center",
         icon: "error",
         title: "Adding Beneficiary has been Denied ",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      console.log(error);
+    }
+  };
+
+  deleteBeneficiary = async (id, Swal) => {
+    try {
+      const response = await api.delete(`/beneficiary/${id}`);
+      console.log(response.data);
+
+      const tempBeneficiary = this.beneficiary.filter(
+        (beneficiary) => beneficiary._id !== id
+      );
+      this.beneficiary = tempBeneficiary;
+      this.loading = false;
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Beneficiary has been Deleted Successfully ",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } catch (error) {
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: "Deleting Beneficiary has been Denied ",
         showConfirmButton: false,
         timer: 3000,
       });

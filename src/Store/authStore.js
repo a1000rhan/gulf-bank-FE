@@ -62,10 +62,7 @@ class AuthStore {
   signIn = async (user, Swal, setIsOpen) => {
     try {
       const response = await api.post("/signin", user);
-      console.log(
-        "🚀 ~ file: authStore.js ~ line 26 ~ AuthStore ~ signIn= ~ response",
-        response.data
-      );
+
       this.setUser(response.data.token);
       Swal.fire({
         position: "top-center",

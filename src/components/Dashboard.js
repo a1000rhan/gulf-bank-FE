@@ -8,6 +8,8 @@ import accountStore from "../Store/accountStore";
 
 import authStore from "../Store/authStore";
 import BeneficiaryTransfer from "./BeneficiaryTransfer";
+import { Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 const Dashboard = () => {
   const totalbalance = accountStore.accounts.reduce(
@@ -35,6 +37,16 @@ const Dashboard = () => {
         <td>{beneficiary.address}</td>
         <td>
           <BeneficiaryTransfer beneficiary={beneficiary} />
+        </td>
+        <td>
+          <Button
+            variant="danger"
+            onClick={() =>
+              beneficiaryStore.deleteBeneficiary(beneficiary._id, Swal)
+            }
+          >
+            Delete
+          </Button>
         </td>
         <div className="d-none">{counter++}</div>
       </tr>
