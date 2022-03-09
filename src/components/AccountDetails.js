@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 import moment from "moment";
 const AccountDetails = () => {
   const { accountslug } = useParams();
+  if (accountStore.loading) return <h1>loading</h1>;
   let color = "";
   const account = accountStore.accounts.find((acc) => acc.slug === accountslug);
   const TransactionsArray = account.transactions.map((trans) => (

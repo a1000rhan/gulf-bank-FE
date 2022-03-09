@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 
 import transactionStore from "../Store/transactionStore";
 import Swal from "sweetalert2";
+import ValidationModal from "./ValidationModal";
 
 const TransactionModal = ({ currentAccount }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,20 +34,12 @@ const TransactionModal = ({ currentAccount }) => {
       account: otherAccountId._id,
     });
   };
+  const currentAccountId = currentAccount._id;
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    transactionStore.addTransaction(transaction, currentAccount._id, setIsOpen);
-    setTransaction({ method: "transfer", amount: 0, account: "" });
-    setTransaction({ method: "", amount: 0 });
-    Swal.fire({
-      position: "top-center",
-      icon: "success",
-      title: "Your Transfer has been Completed Successfully ",
-      showConfirmButton: false,
-      timer: 3000,
-    });
+    // transactionStore.addTransaction(transaction, currentAccountId, setIsOpen);
+    // setTransaction({ method: "transfer", amount: 0, account: "" });
   };
 
   const otherAccount = accountStore.accounts
@@ -85,9 +78,13 @@ const TransactionModal = ({ currentAccount }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button type="submit" variant="primary" onClick={handleSubmit}>
-            Submit
-          </Button>
+          {transaction.account !== "" && (
+            <ValidationModal
+              transaction={transaction}
+              currentAccountId={currentAccountId}
+              setIsOpen={setIsOpen}
+            />
+          )}
         </Modal.Footer>
       </Modal>
     </>
