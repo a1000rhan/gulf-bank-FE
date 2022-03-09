@@ -7,6 +7,7 @@ import TransactionModal from "./TransactionModal";
 import { observer } from "mobx-react";
 import moment from "moment";
 import SearchBar from "./SearchBar";
+import DatePicker from "react-datepicker";
 
 const AccountDetails = () => {
   const { accountslug } = useParams();
