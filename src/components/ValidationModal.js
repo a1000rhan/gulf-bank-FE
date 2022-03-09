@@ -2,6 +2,7 @@ import { Modal, Button, Form, InputGroup } from "react-bootstrap";
 import React, { useState } from "react";
 import accountStore from "../Store/accountStore";
 import transactionStore from "../Store/transactionStore";
+import Swal from "sweetalert2";
 function ValidationModal({ transaction, currentAccountId, setIsOpen }) {
   console.log(transaction);
   const [isOpen, setIsOpenM] = useState(false);
@@ -15,7 +16,13 @@ function ValidationModal({ transaction, currentAccountId, setIsOpen }) {
   //   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    transactionStore.addTransaction(transaction, currentAccountId, setIsOpen);
+    transactionStore.addTransaction(
+      transaction,
+      currentAccountId,
+      Swal,
+      setIsOpen
+    );
+
     setIsOpenM(false);
     setIsOpen(false);
   };

@@ -4,7 +4,7 @@ import accountStore from "../Store/accountStore";
 import { observer } from "mobx-react";
 
 import transactionStore from "../Store/transactionStore";
-import Swal from "sweetalert2";
+
 import ValidationModal from "./ValidationModal";
 
 const TransactionModal = ({ currentAccount }) => {
@@ -41,12 +41,12 @@ const TransactionModal = ({ currentAccount }) => {
     // transactionStore.addTransaction(transaction, currentAccountId, setIsOpen);
     // setTransaction({ method: "transfer", amount: 0, account: "" });
 
-    transactionStore.addTransaction(
-      transaction,
-      currentAccount._id,
-      Swal,
-      setIsOpen
-    );
+    // transactionStore.addTransaction(
+    //   transaction,
+    //   currentAccount._id,
+
+    //   setIsOpen
+    // );
     setTransaction({ method: "transfer", amount: 0, account: "" });
   };
 

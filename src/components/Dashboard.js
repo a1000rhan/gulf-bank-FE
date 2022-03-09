@@ -22,6 +22,7 @@ const Dashboard = () => {
   if (beneficiaryStore.loading) {
     <h1>Loading</h1>;
   }
+
   let counter = 1;
   const beneficiaryArray = beneficiaryStore.beneficiary
     .filter((benf) => benf.owner === authStore.user._id)
@@ -39,8 +40,13 @@ const Dashboard = () => {
       </tr>
     ));
 
+  const totalTransactions = accountStore.accounts.reduce(
+    (total, account) => total + account.transactions.length,
+    0
+  );
+
   const number = beneficiaryArray.length;
-  const number2 = accountStore.accounts.length;
+  const number2 = totalTransactions;
   console.log(
     "🚀 ~ file: Dashboard.js ~ line 48 ~ Dashboard ~ accountStore.accounts.length",
     accountStore.accounts
@@ -79,20 +85,25 @@ const Dashboard = () => {
       </div>
       <br />
       <hr />
-      <div className="w-50">
-        <h1 className="title">Beneficiary</h1>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Beneficiary Name</th>
-              <th scope="col">IBAN</th>
-              <th scope="col">Bank Name</th>
-              <th scope="col">Address</th>
-            </tr>
-          </thead>
-          <tbody>{beneficiaryArray}</tbody>
-        </table>
+      <div className="twoTabels">
+        <div className="w-50">
+          <h1 className="subtitle">Beneficiary</h1>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Beneficiary Name</th>
+                <th scope="col">IBAN</th>
+                <th scope="col">Bank Name</th>
+                <th scope="col">Address</th>
+              </tr>
+            </thead>
+            <tbody>{beneficiaryArray}</tbody>
+          </table>
+        </div>
+        <div className="w-50">
+          <h1 className="subtitle">Transactions</h1>
+        </div>
       </div>
     </div>
   );

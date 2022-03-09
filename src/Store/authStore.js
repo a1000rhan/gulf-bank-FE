@@ -1,6 +1,8 @@
 import { makeAutoObservable, configure } from "mobx";
 import decode from "jwt-decode";
 import api from "./api";
+import beneficiaryStore from "./beneficiaryStore";
+import accountStore from "./accountStore";
 configure({
   enforceActions: "never",
 });
@@ -108,5 +110,6 @@ class AuthStore {
 }
 const authStore = new AuthStore();
 authStore.checkForToken();
-
+beneficiaryStore.fetchBeneficiary();
+accountStore.fetchAccounts();
 export default authStore;

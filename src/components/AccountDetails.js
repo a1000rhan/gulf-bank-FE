@@ -7,10 +7,20 @@ import TransactionModal from "./TransactionModal";
 import { observer } from "mobx-react";
 import moment from "moment";
 import SearchBar from "./SearchBar";
+import DatePicker from "react-datepicker";
 
 const AccountDetails = () => {
   const { accountslug } = useParams();
   const [query, setQuery] = useState("");
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+  const onChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
+
   if (accountStore.loading) return <h1>loading</h1>;
   let color = "";
   const account = accountStore.accounts.find((acc) => acc.slug === accountslug);

@@ -38,6 +38,7 @@ function BeneficiaryTransfer({ beneficiary }) {
         Transfer
       </Button>
       <Modal centered show={isOpen} onHide={() => setIsOpen(false)}>
+        <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <InputGroup>

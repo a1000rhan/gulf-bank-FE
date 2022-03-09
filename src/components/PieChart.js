@@ -7,7 +7,7 @@ const PieChart = ({ number, name }) => {
       plotOptions: {
         radialBar: {
           startAngle: -135,
-          endAngle: 50,
+          endAngle: 225,
           hollow: {
             margin: 0,
             size: "70%",
