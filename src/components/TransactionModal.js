@@ -78,7 +78,7 @@ const TransactionModal = ({ currentAccount }) => {
             </InputGroup>
             <br />
             <InputGroup>
-              <InputGroup.Text>account</InputGroup.Text>
+              <InputGroup.Text>Account</InputGroup.Text>
               <Form.Select name="account" onChange={handelAccount}>
                 <option>Select the account</option>
                 {otherAccount}
@@ -87,13 +87,15 @@ const TransactionModal = ({ currentAccount }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          {transaction.account !== "" && (
-            <ValidationModal
-              transaction={transaction}
-              currentAccountId={currentAccountId}
-              setIsOpen={setIsOpen}
-            />
-          )}
+          {transaction.account !== "" &&
+            transaction.amount !== "0" &&
+            transaction.amount !== "" && (
+              <ValidationModal
+                transaction={transaction}
+                currentAccountId={currentAccountId}
+                setIsOpen={setIsOpen}
+              />
+            )}
         </Modal.Footer>
       </Modal>
     </>

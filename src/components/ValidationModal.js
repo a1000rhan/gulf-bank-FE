@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import accountStore from "../Store/accountStore";
 import transactionStore from "../Store/transactionStore";
 import Swal from "sweetalert2";
+import PasswordValidation from "./PasswordValidation";
 function ValidationModal({ transaction, currentAccountId, setIsOpen }) {
   console.log(transaction);
   const [isOpen, setIsOpenM] = useState(false);
@@ -26,12 +27,15 @@ function ValidationModal({ transaction, currentAccountId, setIsOpen }) {
     setIsOpenM(false);
     setIsOpen(false);
   };
+  const closeModals = (event) => {
+    setIsOpenM(true);
+  };
   return (
     <>
       <Button
         variant="outline-primary"
         className="btn-reg"
-        onClick={() => setIsOpenM(true)}
+        onClick={closeModals}
       >
         Submit
       </Button>
@@ -40,22 +44,25 @@ function ValidationModal({ transaction, currentAccountId, setIsOpen }) {
           <Modal.Title>Summary of Transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form>
             <InputGroup>
               <p>Transfer to {account.nickName}</p>
             </InputGroup>
             <InputGroup>
-              <p>Transfer amount {transaction.amount}</p>
+              <p>Transfer amount: {transaction.amount}KD</p>
             </InputGroup>
             {/* <br /> */}
             <InputGroup></InputGroup>
             <br />
-            <Button type="submit" variant="primary">
-              Confirm
-            </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
+        <Modal.Footer>
+          <PasswordValidation
+            handleSubmit={handleSubmit}
+            setIsOpenM={setIsOpenM}
+            setIsOpen={setIsOpen}
+          />
+        </Modal.Footer>
       </Modal>
     </>
   );
