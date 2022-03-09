@@ -17,7 +17,6 @@ const AccountDetails = () => {
       </div>
 
       <td>amount: {trans.amount} KD &emsp; </td>
-
       <td className={color}>method: {trans.method.toUpperCase()}</td>
       <td>Date: {moment(trans.createdAt).format("YYYY-MM-DD")}</td>
       <hr />
