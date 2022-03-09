@@ -6,6 +6,7 @@ import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
 import { Button } from "react-bootstrap";
 import { observer } from "mobx-react";
+import accountStore from "../Store/accountStore";
 
 const NavBar = () => {
   return (
@@ -26,24 +27,37 @@ const NavBar = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+
           <div className="collapse navbar-collapse " id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <NavLink className="nav-link fs-4" to={"./"}>
-                  Home
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link fs-4" to={"./account"}>
-                  Account
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link fs-4" to={"./dashboard"}>
-                  Dashboard
-                </NavLink>
-              </li>
-            </ul>
+            {authStore.user ? (
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <NavLink className="nav-link fs-4" to={"./"}>
+                    Home
+                  </NavLink>
+                </li>
+
+                <li className="nav-item">
+                  <NavLink className="nav-link fs-4" to={"./account"}>
+                    Account
+                  </NavLink>
+                </li>
+
+                <li className="nav-item">
+                  <NavLink className="nav-link fs-4" to={"./dashboard"}>
+                    Dashboard
+                  </NavLink>
+                </li>
+              </ul>
+            ) : (
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <NavLink className="nav-link fs-4" to={"./"}>
+                    Home
+                  </NavLink>
+                </li>
+              </ul>
+            )}
             <div className="button"></div>
           </div>
         </div>
