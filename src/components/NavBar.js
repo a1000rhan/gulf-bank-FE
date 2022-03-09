@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../images/logo.svg";
 import authStore from "../Store/authStore";
 import SignInModal from "./SignInModal";
@@ -9,6 +9,12 @@ import { observer } from "mobx-react";
 import accountStore from "../Store/accountStore";
 
 const NavBar = () => {
+  const navigate = useNavigate();
+  const handleSignOut = () => {
+    authStore.logout();
+    navigate("./");
+  };
+
   return (
     <div className="mynavbar navbg">
       <nav className="navbar navbar-expand-lg navbar-dark  ">
@@ -64,7 +70,7 @@ const NavBar = () => {
       </nav>
       <div>
         {authStore.user ? (
-          <Button className="btn-reg" onClick={authStore.logout}>
+          <Button className="btn-reg" onClick={handleSignOut}>
             logout
           </Button>
         ) : (

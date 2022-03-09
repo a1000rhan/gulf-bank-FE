@@ -12,7 +12,12 @@ class TransactionStore {
     makeAutoObservable(this, {});
   }
 
-  addTransaction = async (newTransaction, currentAccountId, setIsOpen) => {
+  addTransaction = async (
+    newTransaction,
+    currentAccountId,
+    Swal,
+    setIsOpen
+  ) => {
     console.log(
       "🚀 ~ file: transactionStore.js ~ line 15 ~ TransactionStore ~ addTransaction= ~ newTransaction",
       newTransaction
@@ -28,8 +33,22 @@ class TransactionStore {
       this.loading = false;
       accountStore.fetchAccounts();
       setIsOpen(false);
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "The Transaction is Done",
+        showConfirmButton: false,
+        timer: 3000,
+      });
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: "Try Again!",
+        showConfirmButton: false,
+        timer: 3000,
+      });
     }
   };
 }

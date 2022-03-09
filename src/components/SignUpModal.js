@@ -35,19 +35,12 @@ function SignUpModal() {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(signupSchema) });
+
   const onSubmit = (data) => {
     console.log(data);
     const obj = { ...data, civilId: image.civilId };
     // data.civilId = image.civilId
-    authStore.signUp(obj, setIsOpen);
-    console.log("🚀 ~ file: SignUpModal.js ~ line 41 ~ onSubmit ~ obj", obj);
-    Swal.fire({
-      position: "top-center",
-      icon: "success",
-      title: "You have Successfully Signed Up",
-      showConfirmButton: false,
-      timer: 3000,
-    });
+    authStore.signUp(obj, Swal, setIsOpen);
   };
   // const handelChange = (event) => {
   //   console.log(user);

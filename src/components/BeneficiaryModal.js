@@ -21,14 +21,7 @@ const BeneficiaryModal = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    beneficiaryStore.addBeneficiary(beneficiary, setIsOpen);
-    Swal.fire({
-      position: "top-center",
-      icon: "success",
-      title: "Beneficiary has been Added Successfully ",
-      showConfirmButton: false,
-      timer: 3000,
-    });
+    beneficiaryStore.addBeneficiary(beneficiary, Swal, setIsOpen);
   };
   return (
     <>

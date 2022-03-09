@@ -78,7 +78,7 @@
 .container-Detail {
   display: flex;
   align-items: center;
-  width: 80%;
+
   flex-direction: column;
 }
 .borderTabel {
@@ -87,4 +87,9 @@
 }
 .table-data td {
   width: 170px;
+}
+
+.table {
+  width: 100%;
+  background-color: #dae9eb;
 }

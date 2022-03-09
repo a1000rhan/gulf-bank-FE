@@ -24,13 +24,27 @@ class BeneficiaryStore {
       console.log(error);
     }
   };
-  addBeneficiary = async (newBeneficiary, setIsOpen) => {
+  addBeneficiary = async (newBeneficiary, Swal, setIsOpen) => {
     try {
       const response = await api.post("/beneficiary", newBeneficiary);
 
       this.beneficiary.push(response.data);
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Beneficiary has been Added Successfully ",
+        showConfirmButton: false,
+        timer: 3000,
+      });
       setIsOpen(false);
     } catch (error) {
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: "Adding Beneficiary has been Denied ",
+        showConfirmButton: false,
+        timer: 3000,
+      });
       console.log(error);
     }
   };

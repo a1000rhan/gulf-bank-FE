@@ -38,14 +38,7 @@ function SignInModal() {
   } = useForm({ resolver: yupResolver(schema) });
   const onSubmit = (data) => {
     console.log(data);
-    authStore.signIn(data, setIsOpen);
-    Swal.fire({
-      position: "top-center",
-      icon: "success",
-      title: "Signed In Successfully ",
-      showConfirmButton: false,
-      timer: 3000,
-    });
+    authStore.signIn(data, Swal, setIsOpen);
   };
 
   return (
