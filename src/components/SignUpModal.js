@@ -5,6 +5,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signupSchema } from "./UserValidation";
 import Swal from "sweetalert2";
+// import "../App.css";
+// import styled from "styled-components";
+// import { AccountBox } from "./accountBox";
 
 function SignUpModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,6 +60,14 @@ function SignUpModal() {
   //   authStore.signUp(user);
   //   setIsOpen(false);
   // };
+  // const AppContainer = styled.div`
+  //   width: 100%;
+  //   height: 100%;
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   justify-content: center;
+  // `;
 
   return (
     <>
@@ -67,6 +78,9 @@ function SignUpModal() {
       >
         Sign Up
       </Button>
+      {/* <AppContainer>
+        <AccountBox />
+      </AppContainer> */}
       <Modal centered show={isOpen} onHide={() => setIsOpen(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Sign up</Modal.Title>
@@ -128,7 +142,7 @@ function SignUpModal() {
                 type="file"
                 placeholder="Upload your Civil ID"
                 onChange={handleImage}
-                // {...register("civilId")}
+                {...register("civilId")}
               />
             </InputGroup>
             <p className="error">{errors.civilId?.message}</p>

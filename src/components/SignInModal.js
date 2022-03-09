@@ -50,6 +50,7 @@ function SignInModal() {
   const onSubmit = (data) => {
     console.log(data);
     authStore.signIn(data, Swal, setIsOpen);
+
   };
 
   return (
