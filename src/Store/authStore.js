@@ -85,6 +85,27 @@ class AuthStore {
       });
     }
   };
+  confirmPassword = async (user, setIsOpen, handleSubmit, event, Swal) => {
+    try {
+      const response = await api.post("/signin", user);
+      console.log(
+        "🚀 ~ file: authStore.js ~ line 26 ~ AuthStore ~ signIn= ~ response",
+        response.data
+      );
+      this.setUser(response.data.token);
+      handleSubmit(event);
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Transaction Complete ",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      setIsOpen(false);
+    } catch (error) {
+      return false;
+    }
+  };
 
   logout = () => {
     this.user = null;
