@@ -3,6 +3,7 @@ import { Modal, Button, Form, InputGroup } from "react-bootstrap";
 import accountStore from "../Store/accountStore";
 import authStore from "../Store/authStore";
 import transactionStore from "../Store/transactionStore";
+import Swal from "sweetalert2";
 
 const TransactionModal = ({ currentAccount }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +27,13 @@ const TransactionModal = ({ currentAccount }) => {
     event.preventDefault();
     transactionStore.addTransaction(transaction, currentAccount._id, setIsOpen);
     setTransaction({ method: "", amount: 0 });
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Your Account has been Successfully Created  ",
+      showConfirmButton: false,
+      timer: 3000,
+    });
   };
 
   return (

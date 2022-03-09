@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signupSchema } from "./UserValidation";
+import Swal from "sweetalert2";
 
 function SignUpModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,6 +41,13 @@ function SignUpModal() {
     // data.civilId = image.civilId
     authStore.signUp(obj, setIsOpen);
     console.log("🚀 ~ file: SignUpModal.js ~ line 41 ~ onSubmit ~ obj", obj);
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "You have Successfully Signed Up",
+      showConfirmButton: false,
+      timer: 3000,
+    });
   };
   // const handelChange = (event) => {
   //   console.log(user);

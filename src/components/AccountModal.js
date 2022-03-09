@@ -4,6 +4,8 @@ import accountStore from "../Store/accountStore";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Swal from "sweetalert2";
+
 const schema = yup.object().shape({
   nickName: yup
     .string()
@@ -32,6 +34,14 @@ function AccountModal() {
     console.log(data);
     accountStore.addAccount(data, setIsOpen);
     setCheck(false);
+
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Your Account has been Successfully Created  ",
+      showConfirmButton: false,
+      timer: 3000,
+    });
   };
 
   return (
