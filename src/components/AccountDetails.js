@@ -12,14 +12,10 @@ import DatePicker from "react-datepicker";
 const AccountDetails = () => {
   const { accountslug } = useParams();
   const [query, setQuery] = useState("");
+  const [date, setDate] = useState(null);
+  const [filterDate, setFilterDate] = useState(null);
 
-  const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-  const onChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
 
   if (accountStore.loading) return <h1>loading</h1>;
   let color = "";
@@ -41,11 +37,30 @@ const AccountDetails = () => {
       </div>
     ));
 
+  const handleDate = (e) => {
+    const tempDate = moment(e).format();
+    console.log(moment(e).format());
+    console.log(tempDate);
+    setDate(e);
+    setFilterDate(tempDate);
+
+    console.log(e);
+  };
+
   return (
     <div className="container-Detail">
       <h1 className="title">Account Details</h1>
       <TransactionModal currentAccount={account} />
 
+      <div className="date-picker">
+        <DatePicker
+          placeholderText="Select End Date"
+          dateFormat="Pp"
+          selected={date}
+          onChange={handleDate}
+        />
+        <h5>Date &nbsp;</h5>
+      </div>
       <br />
       <hr />
       <div className="w-50 m-6 borderTabel">
