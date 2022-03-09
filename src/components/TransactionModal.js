@@ -1,32 +1,48 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, InputGroup } from "react-bootstrap";
 import accountStore from "../Store/accountStore";
-import authStore from "../Store/authStore";
+import { observer } from "mobx-react";
+
 import transactionStore from "../Store/transactionStore";
 
 const TransactionModal = ({ currentAccount }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [transaction, setTransaction] = useState({
     method: "transfer",
-    amount: 1,
+    amount: 0,
     account: "",
   });
   const handChange = (event) => {
     return setTransaction({
       ...transaction,
-      [event.target.name]: event.target.value,
+      amount: event.target.value,
     });
   };
-  console.log(
-    "🚀 ~ file: TransactionModal.js ~ line 14 ~ handChange ~ transaction",
-    transaction
-  );
+  const handelAccount = (event) => {
+    const otherAccountId = accountStore.accounts.find(
+      (acc) => event.target.value == acc.nickName
+    );
+
+    console.log(
+      "🚀 ~ file: TransactionModal.js ~ line 25 ~ handelAccount ~ otherAccountId._id",
+      otherAccountId._id
+    );
+    return setTransaction({
+      ...transaction,
+      account: otherAccountId._id,
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     transactionStore.addTransaction(transaction, currentAccount._id, setIsOpen);
-    setTransaction({ method: "", amount: 0 });
+    setTransaction({ method: "transfer", amount: 0, account: "" });
   };
+
+  const otherAccount = accountStore.accounts
+    .filter((acc) => acc._id !== currentAccount._id)
+    .map((acc) => <option>{acc.nickName}</option>);
 
   return (
     <>
@@ -40,17 +56,6 @@ const TransactionModal = ({ currentAccount }) => {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <InputGroup>
-              <InputGroup.Text>Full Name</InputGroup.Text>
-              <Form.Select name="method" onChange={handChange}>
-                <option>select the Transaction Method</option>
-                <option value="transfer">Transfer</option>
-                <option value="deposit">Deposit</option>
-                <option value="withdraw">Withdraw</option>
-              </Form.Select>
-            </InputGroup>
-            <br />
-
-            <InputGroup>
               <InputGroup.Text>Amount</InputGroup.Text>
               <Form.Control
                 name="amount"
@@ -59,6 +64,14 @@ const TransactionModal = ({ currentAccount }) => {
                 required={true}
                 onChange={handChange}
               />
+            </InputGroup>
+            <br />
+            <InputGroup>
+              <InputGroup.Text>account</InputGroup.Text>
+              <Form.Select name="account" onChange={handelAccount}>
+                <option>Select the account</option>
+                {otherAccount}
+              </Form.Select>
             </InputGroup>
           </Form>
         </Modal.Body>
@@ -72,4 +85,4 @@ const TransactionModal = ({ currentAccount }) => {
   );
 };
 
-export default TransactionModal;
+export default observer(TransactionModal);

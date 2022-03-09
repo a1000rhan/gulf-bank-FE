@@ -4,6 +4,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import accountStore from "../Store/accountStore";
 import account from "../account.css";
 import TransactionModal from "./TransactionModal";
+import { observer } from "mobx-react";
 
 const AccountDetails = () => {
   const { accountslug } = useParams();
@@ -15,8 +16,9 @@ const AccountDetails = () => {
         {trans.method === "transfer" ? (color = "red") : (color = "green")}
       </div>
 
-      <td>amount: {trans.amount} KD &nbsp;&nbsp; method: </td>
-      <td className={color}>{trans.method.toUpperCase()}</td>
+      <td>amount: {trans.amount} KD &emsp; </td>
+
+      <td className={color}>method: {trans.method.toUpperCase()}</td>
     </div>
   ));
 
@@ -54,4 +56,4 @@ const AccountDetails = () => {
   );
 };
 
-export default AccountDetails;
+export default observer(AccountDetails);

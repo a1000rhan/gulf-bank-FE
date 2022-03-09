@@ -5,6 +5,7 @@ import BeneficiaryModal from "./BeneficiaryModal";
 import PieChart from "./PieChart";
 import { observer } from "mobx-react";
 import accountStore from "../Store/accountStore";
+import { Button } from "react-bootstrap";
 
 import authStore from "../Store/authStore";
 
@@ -33,6 +34,9 @@ const Dashboard = () => {
         <td>{beneficiary.IBAN}</td>
         <td>{beneficiary.bankName}</td>
         <td>{beneficiary.address}</td>
+        <td>
+          <Button>Transfer</Button>
+        </td>
         <div className="d-none">{counter++}</div>
       </tr>
     ));
