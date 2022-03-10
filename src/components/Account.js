@@ -6,6 +6,7 @@ import { observer } from "mobx-react";
 import AccountModal from "./AccountModal";
 const Account = () => {
   if (accountStore.loading) return <h1>loading</h1>;
+
   const accounts = accountStore.accounts.map((account) => (
     <AccountItem account={account} key={account._id} />
   ));

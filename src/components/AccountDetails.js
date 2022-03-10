@@ -7,17 +7,19 @@ import TransactionModal from "./TransactionModal";
 import { observer } from "mobx-react";
 import moment from "moment";
 import SearchBar from "./SearchBar";
-import DatePicker from "react-datepicker";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import StaticDatePicker from "@mui/lab/StaticDatePicker";
+import { TextField } from "@mui/material";
 
 const AccountDetails = () => {
   const { accountslug } = useParams();
   const [query, setQuery] = useState("");
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(Date());
   const [filterDate, setFilterDate] = useState(null);
 
   const [endDate, setEndDate] = useState(null);
 
-  if (accountStore.loading) return <h1>loading</h1>;
   let color = "";
   const account = accountStore.accounts.find((acc) => acc.slug === accountslug);
   const TransactionsArray = account.transactions
@@ -36,6 +38,7 @@ const AccountDetails = () => {
         <hr />
       </div>
     ));
+  if (accountStore.loading) return <h1>loading</h1>;
 
   const handleDate = (e) => {
     const tempDate = moment(e).format();
@@ -53,13 +56,16 @@ const AccountDetails = () => {
       <TransactionModal currentAccount={account} />
 
       <div className="date-picker">
-        <DatePicker
-          placeholderText="Select End Date"
-          dateFormat="Pp"
-          selected={date}
-          onChange={handleDate}
-        />
-        <h5>Date &nbsp;</h5>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <StaticDatePicker
+            displayStaticWrapperAs="desktop"
+            value={date}
+            onChange={(newValue) => {
+              setDate(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
       </div>
       <br />
       <hr />

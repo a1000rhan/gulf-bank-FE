@@ -1,6 +1,6 @@
 import React from "react";
 import account from "../account.css";
-import { observer } from "mobx-react";
+
 import accountStore from "../Store/accountStore";
 import { Link } from "react-router-dom";
 import card1 from "../images/card-empty.png";
@@ -11,13 +11,21 @@ function AccountItem({ account }) {
 
   const cards = [card1, card2, card3];
 
-  const shuffledArray = cards.sort((a, b) => 0.5 - Math.random());
+  const cardNumber = account.accountNumber.toString().slice(11, 12);
 
+  let cardColor = cards[0];
+  if (cardNumber <= 2) {
+    cardColor = cards[0];
+  } else if (cardNumber <= 4) {
+    cardColor = cards[1];
+  } else {
+    cardColor = cards[2];
+  }
   return (
     <div>
       <Link to={`/account/${account.slug}`}>
         <div className="card-box">
-          <img className="backgroundCard" src={shuffledArray[0]} alt="cards" />
+          <img className="backgroundCard" src={cardColor} alt="cards" />
           <p className="cardNumber">
             8803&nbsp;&nbsp; &nbsp;****&nbsp;&nbsp;&nbsp; ****&nbsp;&nbsp;&nbsp;
             {account.accountNumber
@@ -32,4 +40,4 @@ function AccountItem({ account }) {
   );
 }
 
-export default observer(AccountItem);
+export default AccountItem;
