@@ -1,13 +1,11 @@
 import { Modal, Button, Form, InputGroup } from "react-bootstrap";
 import authStore from "../Store/authStore";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signupSchema } from "./UserValidation";
 import Swal from "sweetalert2";
-// import "../App.css";
-// import styled from "styled-components";
-// import { AccountBox } from "./accountBox";
+import "../App.css";
 
 function SignUpModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +31,7 @@ function SignUpModal() {
   //   const onSubmit = (data) =>{
   //       console.log(data);
   //   }
+  // const { switchToSignin } = useContext(AccountContext);
   const {
     register,
     handleSubmit,
@@ -53,6 +52,8 @@ function SignUpModal() {
   const handleImage = (event) => {
     setImage({ ...image, civilId: event.target.files[0] });
   };
+  // const { switchToSignup } = useContext(AccountContext);
+  // const { switchToSignin } = useContext(AccountContext);
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -60,14 +61,6 @@ function SignUpModal() {
   //   authStore.signUp(user);
   //   setIsOpen(false);
   // };
-  // const AppContainer = styled.div`
-  //   width: 100%;
-  //   height: 100%;
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: center;
-  //   justify-content: center;
-  // `;
 
   return (
     <>
@@ -78,12 +71,10 @@ function SignUpModal() {
       >
         Sign Up
       </Button>
-      {/* <AppContainer>
-        <AccountBox />
-      </AppContainer> */}
+
       <Modal centered show={isOpen} onHide={() => setIsOpen(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Sign up</Modal.Title>
+          <Modal.Title>Sign Up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit(onSubmit)}>
@@ -158,7 +149,7 @@ function SignUpModal() {
               />
             </InputGroup>
             <p className="error">{errors.password?.message}</p>
-            {/* <br /> */}
+            {/* <br />  */}
             <InputGroup>
               <InputGroup.Text>Email</InputGroup.Text>
               <Form.Control
