@@ -22,17 +22,11 @@ class AuthStore {
     try {
       const formData = new FormData();
       for (const key in newUser) formData.append(key, newUser[key]);
-      console.log(
-        "🚀 ~ file: authStore.js ~ line 22 ~ AuthStore ~ signUp= ~ formData",
-        formData
-      );
 
       const response = await api.post("/signup", formData);
-      console.log(
-        "🚀 ~ file: authStore.js ~ line 25 ~ AuthStore ~ signUp= ~ response",
-        response.data
-      );
+
       this.setUser(response.data.token);
+      accountStore.fetchAccounts();
       setIsOpen(false);
       Swal.fire({
         position: "top-center",
@@ -62,10 +56,7 @@ class AuthStore {
   signIn = async (user, Swal, setIsOpen) => {
     try {
       const response = await api.post("/signin", user);
-      console.log(
-        "🚀 ~ file: authStore.js ~ line 26 ~ AuthStore ~ signIn= ~ response",
-        response.data
-      );
+
       this.setUser(response.data.token);
       Swal.fire({
         position: "top-center",
@@ -74,6 +65,7 @@ class AuthStore {
         showConfirmButton: false,
         timer: 3000,
       });
+      accountStore.fetchAccounts();
       setIsOpen(false);
     } catch (error) {
       Swal.fire({
@@ -132,5 +124,5 @@ class AuthStore {
 const authStore = new AuthStore();
 authStore.checkForToken();
 beneficiaryStore.fetchBeneficiary();
-accountStore.fetchAccounts();
+
 export default authStore;

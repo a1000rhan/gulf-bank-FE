@@ -94,6 +94,8 @@
   width: 100%;
   background-color: #dae9eb;
 }
-.datePicker {
-  width: 500px;
+.date-picker {
+  background-color: #005a8c;
+  display: flex;
+  flex-direction: row;
 }

@@ -4,17 +4,6 @@ import authStore from "../Store/authStore";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-  MDBBtn,
-  MDBIcon,
-  MDBModalFooter,
-} from "mdbreact";
 
 import { schema } from "./UserValidation";
 import Swal from "sweetalert2";
@@ -29,7 +18,6 @@ import Swal from "sweetalert2";
 // });
 function SignInModal() {
   const [isOpen, setIsOpen] = useState(false);
-  console.log("🚀 ~ file: SignInModal.js ~ line 9 ~ schema", schema);
 
   // const [user, setUser] = useState({
   //   username: "",
