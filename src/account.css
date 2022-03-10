@@ -4,7 +4,6 @@
 }
 .title {
   font-size: 60px;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: #005a8c;
   margin-left: 100px;
 }
@@ -68,6 +67,7 @@
   height: 200px;
   display: flex;
   transition: 0.2s;
+  margin-bottom: 20px;
 }
 .card-box:hover {
   width: 370px;

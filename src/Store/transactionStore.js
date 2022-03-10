@@ -43,6 +43,7 @@ class TransactionStore {
       this.transaction.push(response.data);
       this.loading = false;
       accountStore.fetchAccounts();
+      this.fetchTransactions();
       setIsOpen(false);
     } catch (error) {
       console.log(error);

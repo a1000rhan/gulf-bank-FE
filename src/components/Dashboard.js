@@ -5,7 +5,7 @@ import BeneficiaryModal from "./BeneficiaryModal";
 import PieChart from "./PieChart";
 import { observer } from "mobx-react";
 import accountStore from "../Store/accountStore";
-
+import moment from "moment";
 import authStore from "../Store/authStore";
 import BeneficiaryTransfer from "./BeneficiaryTransfer";
 import { Button } from "react-bootstrap";
@@ -18,7 +18,7 @@ const Dashboard = () => {
     0
   );
 
-  if (beneficiaryStore.loading) {
+  if (beneficiaryStore.loading && transactionStore.loading) {
     <h1>Loading</h1>;
   }
 
@@ -26,6 +26,7 @@ const Dashboard = () => {
   console.log(transactions);
   let counter = 1;
   let counterTrans = 1;
+  let color = "";
   const beneficiaryArray = beneficiaryStore.beneficiary.map((beneficiary) => (
     <tr>
       <th scope="row">{counter}</th>
@@ -38,12 +39,12 @@ const Dashboard = () => {
       </td>
       <td>
         <Button
-          variant="danger"
+          variant="outline-danger"
           onClick={() =>
             beneficiaryStore.deleteBeneficiary(beneficiary._id, Swal)
           }
         >
-          Delete
+          Remove
         </Button>
       </td>
       <div className="d-none">{counter++}</div>
@@ -54,11 +55,16 @@ const Dashboard = () => {
     (total, account) => total + account.transactions.length,
     0
   );
+  transactionStore.fetchTransactions();
   const lastTransactions = transactionStore.transaction.map((transaction) => (
     <tr>
+      <div className="d-none">
+        {transaction.method === "deposit" ? (color = "green") : (color = "red")}
+      </div>
       <th scope="row">{counterTrans}</th>
       <td>{transaction.amount}</td>
-      <td>{transaction.method}</td>
+      <td className={color}>{transaction.method}</td>
+      <td>{moment(transaction.createdAt).format("DD-MM-YYYY")}</td>
       <div className="d-none">{counterTrans++}</div>
     </tr>
   ));
@@ -121,9 +127,9 @@ const Dashboard = () => {
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Transactions</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Method</th>
+                <th scope="col">Date</th>
               </tr>
             </thead>
             <tbody>{lastTransactions}</tbody>

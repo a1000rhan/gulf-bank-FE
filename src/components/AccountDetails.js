@@ -17,7 +17,6 @@ const AccountDetails = () => {
   const { accountslug } = useParams();
   const [query, setQuery] = useState("");
   const [date, setDate] = useState([null, null]);
-  const [filterDate, setFilterDate] = useState(null);
 
   const [endDate, setEndDate] = useState(null);
   if (accountStore.loading) return <h1>loading</h1>;
@@ -46,7 +45,7 @@ const AccountDetails = () => {
 
         <td>Amount: {trans.amount} KD &emsp; </td>
         <td>
-          Method: <span className={color}>{trans.method.toUpperCase()}</span>
+          Method: <span className={color}>{trans.method}</span>
         </td>
         <td>Date: {moment(trans.createdAt).format("DD-MM-YYYY")}</td>
         <hr />
@@ -88,8 +87,8 @@ const AccountDetails = () => {
       <div className="date-picker">
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateRangePicker
-            startText="Check-in"
-            endText="Check-out"
+            startText="Start Date"
+            endText="End Date"
             value={date}
             onChange={(newValue) => {
               setDate(newValue);

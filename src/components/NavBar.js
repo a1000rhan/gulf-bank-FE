@@ -71,7 +71,7 @@ const NavBar = () => {
       <div>
         {authStore.user ? (
           <Button className="btn-reg" onClick={handleSignOut}>
-            logout
+            Logout
           </Button>
         ) : (
           <>
