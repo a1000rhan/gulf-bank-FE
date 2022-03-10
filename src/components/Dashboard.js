@@ -10,6 +10,7 @@ import authStore from "../Store/authStore";
 import BeneficiaryTransfer from "./BeneficiaryTransfer";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
+import transactionStore from "../Store/transactionStore";
 
 const Dashboard = () => {
   const totalbalance = accountStore.accounts.reduce(
@@ -53,11 +54,11 @@ const Dashboard = () => {
     (total, account) => total + account.transactions.length,
     0
   );
-  const lastTransactions = accountStore.accounts.map((account) => (
+  const lastTransactions = transactionStore.transaction.map((transaction) => (
     <tr>
       <th scope="row">{counterTrans}</th>
-      <td>{account.transactions.amount}</td>
-      <td>{account.transactions.method}</td>
+      <td>{transaction.amount}</td>
+      <td>{transaction.method}</td>
       <div className="d-none">{counterTrans++}</div>
     </tr>
   ));
