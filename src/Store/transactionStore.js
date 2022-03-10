@@ -2,6 +2,7 @@ import { makeAutoObservable, configure } from "mobx";
 import accountStore from "./accountStore";
 
 import api from "./api";
+import authStore from "./authStore";
 configure({
   enforceActions: "never",
 });
@@ -11,7 +12,17 @@ class TransactionStore {
   constructor() {
     makeAutoObservable(this, {});
   }
-
+  fetchTransactions = async () => {
+    try {
+      const response = await api.get("/transaction");
+      this.transaction = response.data.filter(
+        (transaction) => transaction.owner === authStore.user._id && transaction
+      );
+      console.log(this.transaction);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   addTransaction = async (
     newTransaction,
     currentAccountId,
@@ -33,13 +44,6 @@ class TransactionStore {
       this.loading = false;
       accountStore.fetchAccounts();
       setIsOpen(false);
-      Swal.fire({
-        position: "top-center",
-        icon: "success",
-        title: "The Transaction is Done",
-        showConfirmButton: false,
-        timer: 3000,
-      });
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -53,5 +57,5 @@ class TransactionStore {
   };
 }
 let transactionStore = new TransactionStore();
-
+transactionStore.fetchTransactions();
 export default transactionStore;
