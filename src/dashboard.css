@@ -13,7 +13,7 @@
 }
 .vl {
   margin-top: 70px;
-  border-left: 2px solid gray;
+  border-left: 2px solid rgb(128, 128, 128);
   height: 100px;
 }
 .subtitle {
