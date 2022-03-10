@@ -55,7 +55,7 @@ const Dashboard = () => {
     (total, account) => total + account.transactions.length,
     0
   );
-  transactionStore.fetchTransactions();
+
   const lastTransactions = transactionStore.transaction.map((transaction) => (
     <tr>
       <div className="d-none">
@@ -106,7 +106,7 @@ const Dashboard = () => {
       <br />
       <hr />
       <div className="twoTabels">
-        <div className="w-50">
+        <div className=" benefi">
           <h1 className="subtitle">Beneficiary</h1>
           <table className="table">
             <thead>
@@ -121,7 +121,7 @@ const Dashboard = () => {
             <tbody>{beneficiaryArray}</tbody>
           </table>
         </div>
-        <div className="w-50 trans ">
+        <div className=" trans ">
           <h1 className="subtitle">Transactions</h1>
           <table className="table">
             <thead>

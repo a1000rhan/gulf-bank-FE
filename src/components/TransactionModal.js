@@ -62,7 +62,7 @@ const TransactionModal = ({ currentAccount }) => {
 
       <Modal centered show={isOpen} onHide={() => setIsOpen(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Beneficiary</Modal.Title>
+          <Modal.Title>Make Transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>

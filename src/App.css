@@ -68,3 +68,9 @@
 .blue {
   color: rgb(0, 30, 128);
 }
+.transf-btn {
+  margin: auto;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}

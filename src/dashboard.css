@@ -22,6 +22,10 @@
 .twoTabels {
   display: flex;
 }
+.benefi {
+  margin-right: 50px;
+  width: flex;
+}
 .trans {
   margin-left: 50px;
 }
