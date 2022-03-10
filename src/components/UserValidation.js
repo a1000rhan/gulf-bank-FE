@@ -7,7 +7,14 @@ export const schema = yup.object({
     .max(15)
     .required("please enter your username must be between 4 and 15 charecters"),
 
-  password: yup.string().min(1).required("please enter your password"),
+  password: yup
+    .string()
+    .min(1)
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+      "Minimum eight characters, at least one letter and one number"
+    )
+    .required("please enter your password"),
 });
 export const signupSchema = schema.shape({
   firstName: yup.string().min(1).required("please enter your first name"),
