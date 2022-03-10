@@ -7,24 +7,37 @@ import TransactionModal from "./TransactionModal";
 import { observer } from "mobx-react";
 import moment from "moment";
 import SearchBar from "./SearchBar";
+import DateRangePicker from "@mui/lab/DateRangePicker";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import StaticDatePicker from "@mui/lab/StaticDatePicker";
-//
-import { TextField } from "@mui/material";
+
+import { TextField, Box } from "@mui/material";
 
 const AccountDetails = () => {
   const { accountslug } = useParams();
   const [query, setQuery] = useState("");
-  const [date, setDate] = useState(Date());
+  const [date, setDate] = useState([null, null]);
   const [filterDate, setFilterDate] = useState(null);
 
   const [endDate, setEndDate] = useState(null);
-
+  if (accountStore.loading) return <h1>loading</h1>;
   let color = "";
   const account = accountStore.accounts.find((acc) => acc.slug === accountslug);
+
   const TransactionsArray = account.transactions
     .filter((trans) => trans.amount >= query)
+    .filter((trans) => {
+      if (
+        dateFormat(date[0], "dd-MM-yyyy") <=
+          dateFormat(trans.createdAt, "dd-MM-yyyy") &&
+        dateFormat(date[1], "dd-MM-yyyy") >=
+          dateFormat(trans.createdAt, "dd-MM-yyyy")
+      ) {
+        return trans;
+      } else if (date[0] === null && date[1] === null) {
+        return trans;
+      }
+    })
     .map((trans) => (
       <div className="table-data">
         <div className="d-none">
@@ -39,37 +52,58 @@ const AccountDetails = () => {
         <hr />
       </div>
     ));
-  if (accountStore.loading) return <h1>loading</h1>;
 
-  const handleDate = (e) => {
-    const tempDate = moment(e).format();
-    console.log(moment(e).format());
-    console.log(tempDate);
-    setDate(e);
-    setFilterDate(tempDate);
+  function dateFormat(inputDate, format) {
+    //parse the input date
+    const date = new Date(inputDate);
 
-    console.log(e);
-  };
+    //extract the parts of the date
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    //replace the month
+    format = format.replace("MM", month.toString().padStart(2, "0"));
+
+    //replace the year
+    if (format.indexOf("yyyy") > -1) {
+      format = format.replace("yyyy", year.toString());
+    } else if (format.indexOf("yy") > -1) {
+      format = format.replace("yy", year.toString().substr(2, 2));
+    }
+
+    //replace the day
+    format = format.replace("dd", day.toString().padStart(2, "0"));
+
+    return format;
+  }
 
   return (
     <div className="container-Detail">
       <h1 className="title">Account Details</h1>
       <TransactionModal currentAccount={account} />
 
+      <br />
+      <hr />
       <div className="date-picker">
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <StaticDatePicker
-            displayStaticWrapperAs="desktop"
+          <DateRangePicker
+            startText="Check-in"
+            endText="Check-out"
             value={date}
             onChange={(newValue) => {
               setDate(newValue);
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(startProps, endProps) => (
+              <React.Fragment>
+                <TextField {...startProps} />
+                <Box sx={{ mx: 2 }}> to </Box>
+                <TextField {...endProps} />
+              </React.Fragment>
+            )}
           />
         </LocalizationProvider>
       </div>
-      <br />
-      <hr />
       <div className="w-50 m-6 borderTabel">
         <SearchBar setQuery={setQuery} />
         <table className="table theTable ">
