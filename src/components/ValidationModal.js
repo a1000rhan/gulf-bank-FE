@@ -32,11 +32,7 @@ function ValidationModal({ transaction, currentAccountId, setIsOpen }) {
   };
   return (
     <>
-      <Button
-        variant="outline-primary"
-        className="btn-reg"
-        onClick={closeModals}
-      >
+      <Button variant="outline-primary" className="m-1" onClick={closeModals}>
         Submit
       </Button>
       <Modal centered show={isOpen} onHide={() => setIsOpenM(false)}>
