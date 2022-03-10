@@ -38,7 +38,7 @@ function PasswordValidation({ handleSubmit, setIsOpenM, setIsOpen }) {
               />
             </InputGroup>
 
-            <Button type="submit" variant="primary">
+            <Button type="submit" className="transf-btn" variant="primary">
               Transfer
             </Button>
           </Form>

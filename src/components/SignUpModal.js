@@ -61,7 +61,7 @@ function SignUpModal() {
   return (
     <>
       <Button
-        variant="outline-primary"
+        variant="primary"
         className="btn-reg"
         onClick={() => setIsOpen(true)}
       >
