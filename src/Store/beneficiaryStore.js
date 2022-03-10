@@ -28,6 +28,7 @@ class BeneficiaryStore {
       const response = await api.post("/beneficiary", newBeneficiary);
 
       this.beneficiary.push(response.data);
+      this.fetchBeneficiary();
       Swal.fire({
         position: "top-center",
         icon: "success",

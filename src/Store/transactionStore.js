@@ -43,7 +43,7 @@ class TransactionStore {
       this.transaction.push(response.data);
       this.loading = false;
       accountStore.fetchAccounts();
-
+      this.fetchTransactions();
       Swal.fire({
         position: "top-center",
         icon: "success",
