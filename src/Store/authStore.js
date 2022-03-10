@@ -20,6 +20,7 @@ class AuthStore {
 
   signUp = async (newUser, Swal, setIsOpen) => {
     try {
+      console.log(newUser);
       const formData = new FormData();
       for (const key in newUser) formData.append(key, newUser[key]);
 
@@ -95,6 +96,13 @@ class AuthStore {
       });
       setIsOpen(false);
     } catch (error) {
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: "Wrong Password",
+        showConfirmButton: false,
+        timer: 3000,
+      });
       return false;
     }
   };

@@ -21,6 +21,8 @@ const Dashboard = () => {
     <h1>Loading</h1>;
   }
 
+  let transactions = [];
+  console.log(transactions);
   let counter = 1;
   let counterTrans = 1;
   const beneficiaryArray = beneficiaryStore.beneficiary.map((beneficiary) => (
